@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-normal fixed-top navbar-transparent z-depth-0" id="nav" role="navigation">
-    <a class="navbar-brand" href="../home/"><img src="../static/elements/logo/logo.png" width="32" alt="PharmMDKKU" align="center"></a>
+    <a class="navbar-brand" href="../home/"><img src="../static/elements/logo/logo.png" width="32" alt="PharmMDKKU" align="center"> <span class="badge badge-lca">LCA</span></a>
     <button class="navbar-toggler navbar-<?php if (isDarkmode()) echo "dark"; else echo "light"; ?>" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -17,9 +17,6 @@
                 <a class="nav-link" href="../submission/">Submission</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../contest/">Contest</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="../editorial/">Editorial</a>
             </li>
             <li class="nav-item">
@@ -34,7 +31,14 @@
                 </li>
                 <?php if (isset($_SESSION['id'])) { ?>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../static/elements/user.png" class="rounded-circle" width="20" alt="Profile"> <?php echo $_SESSION['name']; ?> <?php if (isAdmin($_SESSION['id'], $conn)) echo "<span class='badge badge-coekku'>Admin</span>"; ?></a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../static/elements/user.png" id="profile" class="rounded-circle" width="20" alt="Profile"> <?php echo $_SESSION['name']; ?></a>
+                    <script>
+                        var target = "https://ilp.kku.ac.th/Sac/FrontEnd/SacV2/student_photo.php?id=<?php echo $_SESSION['std_id']; ?>";
+                        $.get("https://ilp.kku.ac.th/Sac/FrontEnd/SacV2/student_photo.php?id=<?php echo $_SESSION['std_id']; ?>").done(function( data ) {
+                            $("#profile").html(data);
+                            alert( "Load was performed." );
+                        });
+                    </script>
                     <div class="dropdown-menu dropdown-menu-left dropdown-menu-md-right dropdown-coekku z-depth-1" aria-labelledby="navbarDropdown">
                         <!--a class="dropdown-item" href="../profile/"> แก้ไขข้อมูลส่วนตัว <i class="fas fa-user"></i></a>
                         <div class="dropdown-divider"></div-->

@@ -2,7 +2,7 @@
     <div class="container h-100 w-100">
         <div class="h-100 w-100 row align-items-center">
             <div class="col-12 col-md-8">
-                <h1 class="font-weight-bold text-center text-coe">Donation</h1>
+                <h1 class="font-weight-bold text-center text-coekku">Donation</h1>
                 <div class="d-flex justify-content-center"><img src="../static/elements/promptpay.png" class="z-depth-1 mb-3" width="300" /></div>
                 <h5 class="text-center font-weight-bold">Palapon Soontornpas / พลภณ สุนทรภาส</h5>
                 <hr>
@@ -13,14 +13,14 @@
                 </p>
             </div>
             <div class="col-12 col-md-4">
-                <h4 class="font-weight-bold text-center text-coe">Donator</h4>
+                <h4 class="font-weight-bold text-center text-coekku">Donator</h4>
                 <p class="text-center"><small class="text-muted">ตอนนี้เป็น Manual Update นะงับ ยังเขียนไม่เสร็จ 555</small></p>
                 <div class="table-responsive">
                     <table class="table table-hover w-100" id="submissionTable">
                         <thead>
                             <tr class="text-nowrap me">
-                                <th scope="col" class="font-weight-bold text-coe">User</th>
-                                <th scope="col" class="font-weight-bold text-coe">Amount</th>
+                                <th scope="col" class="font-weight-bold text-coekku">User</th>
+                                <th scope="col" class="font-weight-bold text-coekku">Amount</th>
                             </tr>
                         </thead>
                         <tbody class="text-nowrap">

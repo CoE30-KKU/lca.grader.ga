@@ -56,7 +56,7 @@
     }
 ?>
 <div class="container mb-3" style="padding-top: 88px;" id="container">
-    <h2 class="font-weight-bold text-coe"><?php echo $name; ?> <span class='badge badge-coekku'><?php echo $codename; ?></span> <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { echo '<a href="../pages/problem_toggle_view.php?problem_id='.$id.'&hide='.$hide.'">'; if ($hide) { echo '<i class="fas fa-eye-slash"></i>'; } else { echo '<i class="fas fa-eye"></i>'; } echo '</a>'; } ?></h2>
+    <h2 class="font-weight-bold text-coekku"><?php echo $name; ?> <span class='badge badge-coekku'><?php echo $codename; ?></span> <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { echo '<a href="../pages/problem_toggle_view.php?problem_id='.$id.'&hide='.$hide.'">'; if ($hide) { echo '<i class="fas fa-eye-slash"></i>'; } else { echo '<i class="fas fa-eye"></i>'; } echo '</a>'; } ?></h2>
     <small class="text-muted"><?php echo $author; ?></small>
     <hr>
     <div class="row">
@@ -79,7 +79,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="card-text">
-                        <h5 class="font-weight-bold text-coe">Task</h5>
+                        <h5 class="font-weight-bold text-coekku">Task</h5>
                         Time Limit: <?php echo $time; ?>
                         <br>Memory Limit: <?php echo $mem; ?> ❓
                         <br>Score: <?php echo $score; ?> pts.
@@ -88,12 +88,12 @@
                 </div>
             </div>
             <?php if (!isLogin()) { ?>
-                <a href="../login/" class='btn btn-coe btn-block'>Login</a>
+                <a href="../login/" class='btn btn-coekku btn-block'>Login</a>
             <?php } else {?>
             <div class="card mb-3">
                 <div class="card-body">
                     <form method="post" action="../pages/problem_user_submit.php" enctype="multipart/form-data">
-                        <h5 class="font-weight-bold text-coe">Submission</h5>
+                        <h5 class="font-weight-bold text-coekku">Submission</h5>
                         <div class="custom-file mb-2">
                             <input type="hidden" name="probID" value="<?php echo $id; ?>"/>
                             <input type="hidden" name="probCodename" value="<?php echo $codename; ?>"/>
@@ -150,7 +150,7 @@
                                 </script>
                             </div>
                             <div class="col-12 col-md-6">
-                                <button type="submit" id="submitbtn" value="prob" name="submit" class="btn btn-block btn-coe btn-md" disabled>Submit</button>
+                                <button type="submit" id="submitbtn" value="prob" name="submit" class="btn btn-block btn-coekku btn-md" disabled>Submit</button>
                             </div>
                         </div>
                     </form>
@@ -158,7 +158,7 @@
             </div>
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="font-weight-bold text-coe">History</h5>
+                    <h5 class="font-weight-bold text-coekku">History</h5>
                     <div class="table-responsive" style="max-height: 248px;">
                         <table class="table table-sm table-hover w-100 d-table">
                             <thead>

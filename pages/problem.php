@@ -1,14 +1,14 @@
 <div class="container mb-3" style="padding-top: 88px;" id="container">
-    <h1 class="display-4 font-weight-bold text-center text-coe">Problem</h1>
-    <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { ?><a href="../problem/create" class="btn btn-coe btn-sm">+ Add Problem</a><?php } ?>
+    <h1 class="display-4 font-weight-bold text-center text-coekku">Problem</h1>
+    <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { ?><a href="../problem/create" class="btn btn-coekku btn-sm">+ Add Problem</a><?php } ?>
     <div class="table-responsive">
         <table class="table table-hover w-100 d-block d-md-table" id="problemTable">
             <thead>
                 <tr class="text-nowrap">
-                    <th scope="col" class="font-weight-bold text-coe text-right">ID</th>
-                    <th scope="col" class="font-weight-bold text-coe">Task</th>
-                    <th scope="col" class="font-weight-bold text-coe">Rate</th>
-                    <th scope="col" class="font-weight-bold text-coe">Result</th>
+                    <th scope="col" class="font-weight-bold text-coekku text-right">ID</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Task</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Rate</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Result</th>
                 </tr>
             </thead>
             <tbody class="text-nowrap">

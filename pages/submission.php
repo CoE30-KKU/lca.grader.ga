@@ -1,5 +1,5 @@
 <div class="container mb-3" style="padding-top: 88px;" id="container">
-    <h1 class="display-4 font-weight-bold text-center text-coe">Submission</h1>
+    <h1 class="display-4 font-weight-bold text-center text-coekku">Submission</h1>
     <?php if (isLogin()) { ?>
     <div class="switch switch-danger mb-1">
         <label>
@@ -12,12 +12,12 @@
         <table class="table table-hover w-100 d-block d-md-table" id="submissionTable">
             <thead>
                 <tr class="text-nowrap me">
-                    <th scope="col" class="font-weight-bold text-coe">ID</th>
-                    <th scope="col" class="font-weight-bold text-coe">Timestamp</th>
-                    <th scope="col" class="font-weight-bold text-coe">User</th>
-                    <th scope="col" class="font-weight-bold text-coe">Problem ID</th>
-                    <th scope="col" class="font-weight-bold text-coe">Lang</th>
-                    <th scope="col" class="font-weight-bold text-coe">Result</th>
+                    <th scope="col" class="font-weight-bold text-coekku">ID</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Timestamp</th>
+                    <th scope="col" class="font-weight-bold text-coekku">User</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Problem ID</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Lang</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Result</th>
                 </tr>
             </thead>
             <tbody class="text-nowrap">

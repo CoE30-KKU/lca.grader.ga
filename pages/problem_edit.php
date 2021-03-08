@@ -1,5 +1,5 @@
 <?php needAdmin($conn); 
-    $probName = "";$probCodename = "";$probScore = "";$probRate = "";$probTime = "";$probMemory = ""; $id = -1; $accept = ""; $hide = 0; $last_hide_updated = time();
+    $probName = "";$probCodename = ""; $probScore = 100; $probRate = ""; $id = -1; $accept = ""; $hide = 0; $last_hide_updated = time();
     if (isset($_GET['id'])) {
         $id = (int) $_GET['id'];
         if ($stmt = $conn -> prepare("SELECT * FROM `problem` WHERE id = ?")) {
@@ -8,7 +8,7 @@
             $result = $stmt->get_result();
             if ($result->num_rows == 1) {
                 while ($row = $result->fetch_assoc()) {
-                    $probName = $row['name']; $probCodename = $row['codename']; $probMemory = $row['memory']; $probTime = $row['time']; $probScore = $row['score']; $probAuthor = $row['writer'];
+                    $probName = $row['name']; $probCodename = $row['codename']; $probScore = $row['score']; $probAuthor = $row['writer'];
                     
                     $prop = json_decode($row['properties'], true);
 
@@ -35,7 +35,7 @@
 <div class="container" style="padding-top: 88px;">
     <div class="container mb-3" id="container">
         <form method="post" action="../pages/problem_save.php<?php if (isset($_GET['id'])) echo '?id=' . $_GET['id']; ?>" enctype="multipart/form-data">
-            <div class="font-weight-bold text-coe">
+            <div class="font-weight-bold text-coekku">
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="md-form">
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-12 col-md-3">
                         <div class="md-form">
-                            <input type="text" id="writer" name="writer" class="form-control" value="<?php if (!empty($probAuthor)) echo $probAuthor; ?>"/>
+                            <input type="text" id="writer" name="writer" class="form-control" disabled value="<?php if (!empty($probAuthor)) echo $probAuthor; else echo $_SESSION['rname']; ?>"/>
                             <label class="form-label" for="writer">Author</label>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                 <div class="col-12 col-md-4">
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h5 class="font-weight-bold text-coe">Config</h5>
+                            <h5 class="font-weight-bold text-coekku">Config</h5>
                             <div class="md-form">
                             <label for="rating">Rating</label>
                                 <select class="mdb-select md-form colorful-select dropdown-primary" id="rating" name="rating" required>
@@ -108,44 +108,20 @@
                                 </script>
                             </div>
                             <div class="md-form">
-                                <input type="text" id="score" name="score" class="form-control" value="<?php echo $probScore; ?>" required  />
+                                <input type="text" id="score" name="score" class="form-control" value="<?php echo $probScore; ?>" required  placeholder="Default is 100"/>
                                 <label class="form-label" for="score">Score</label>
-                            </div>
-                            <div class="md-form">
-                                <input type="text" id="time" name="time" class="form-control" value="<?php echo $probTime; ?>" required  />
-                                <label class="form-label" for="time">Time (Millisecond)</label>
-                            </div>
-                            <div class="md-form">
-                                <input type="text" id="memory" name="memory" class="form-control" value="<?php echo $probMemory; ?>" required />
-                                <label class="form-label" for="memory">Memory (Megabyte)</label>
                             </div>
                         </div>
                     </div>
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h5 class="font-weight-bold text-coe">Language</h5>
+                            <h5 class="font-weight-bold text-coekku">Language</h5>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="C" id="C" name="lang[]">
-                                <label class="form-check-label" for="C">C</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Cpp" id="C++" name="lang[]">
-                                <label class="form-check-label" for="C++">C++</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Java" id="Java" name="lang[]">
-                                <label class="form-check-label" for="Java">Java</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Python" id="Python" name="lang[]">
-                                <label class="form-check-label" for="Python">Python</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="TXT" id="Plain Text" name="lang[]">
-                                <label class="form-check-label" for="Plain Text">Plain Text</label>
+                                <input class="form-check-input" type="checkbox" value="TXT" id="Plain Text" disabled name="lang[]">
+                                <label class="form-check-label" for="Plain Text">LCA Template (Plain Text)</label>
                             </div>
                             <?php if (!isset($_GET['id']) || empty($accept)) { //Create case, check all by default ?>
-                                <script>$('input[type=checkbox][value!=TXT]').prop('checked',true);</script>
+                                <script>$('input[type=checkbox][value=TXT]').prop('checked',true);</script>
                             <?php } else { 
                                 foreach($accept as $a) { ?>
                                 <script>$('input[type=checkbox][value=<?php echo $a; ?>]').prop('checked',true);</script>
@@ -155,7 +131,8 @@
                     </div>
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h5 class="font-weight-bold text-coe">Testcase<small class="text-muted font-weight-light"> Accept only .zip</small></h5>
+                            <h5 class="font-weight-bold text-coekku">Answer<small class="text-muted font-weight-light"> Accept only .zip</small>
+                            &nbsp;<a href="#guide" target="_blank"><i class="fas fa-question-circle"></i></a></h5>
                             <?php if (isset($_GET['id'])) {
                                 $id = (int) $_GET['id'];
                                 $path = "../file/testcase/$id/";                                
@@ -179,7 +156,7 @@
                             <small class="text-danger">*การเปลี่ยนแปลงไฟล์จะเป็นการแทนที่ด้วยไฟล์ใหม่ทั้งหมด</small>
                         </div>
                     </div>
-                    <button class="btn btn-coe btn-block" type="submit" name="problem" value="<?php if (isset($_GET['id'])) echo "edit"; else echo "create"; ?>">Save</button>
+                    <button class="btn btn-coekku btn-block" type="submit" name="problem" value="<?php if (isset($_GET['id'])) echo "edit"; else echo "create"; ?>">Save</button>
                 </div>
             </div>
         </form>

@@ -26,7 +26,6 @@ RewriteRule ^doc/([0-9]+)-(.*)$ file/judge/prob/$1/$2.pdf
 
 RewriteRule ^login/$ pages/page_loader.php?target=login.php
 RewriteRule ^logout/$ static/functions/auth/logout.php
-RewriteRule ^register/$ pages/page_loader.php?target=register.php
 
 Options +FollowSymlinks
 Options +Indexes
