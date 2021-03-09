@@ -51,17 +51,6 @@
         transition: 0.3s;
     }
 
-    .btn-coekku {
-        color: white !important;
-        background-color: #801364 !important;
-        transition: 0.3s;
-    }
-
-    .btn-coekku:hover {
-        color: white !important;
-        background-color: #570743 !important;
-    }
-
     .navbar {
         background-color: white !important;
     }
@@ -271,6 +260,45 @@
         padding-top: 88px;
     }
 
+    .bg-coekku {
+        background-color: #801364;
+        color: white;
+    }
+
+    .modal-coekku .modal-header {
+        padding: 9px 15px;
+        border-bottom: 1px solid #eee;
+        color: white;
+        background-color: #801364;
+        -webkit-border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -moz-border-radius-topleft: 5px;
+        -moz-border-radius-topright: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .badge-coekku {
+        color: white;
+        background-color: #801364 !important;
+    }
+
+    .badge-lca {
+        color: white;
+        background-color: #20639B !important;
+    }
+
+    .btn-coekku {
+        color: white !important;
+        background-color: #801364 !important;
+        transition: 0.3s;
+    }
+
+    .btn-coekku:hover {
+        color: white !important;
+        background-color: #570743 !important;
+    }
+
     .text-coekku {
         color: #801364 !important;
         transition: 0.3s;
@@ -344,24 +372,6 @@
         background-color: white;
     }
 
-    .bg-coekku {
-        background-color: #801364;
-        color: white;
-    }
-
-    .modal-coekku .modal-header {
-        padding: 9px 15px;
-        border-bottom: 1px solid #eee;
-        color: white;
-        background-color: #801364;
-        -webkit-border-top-left-radius: 5px;
-        -webkit-border-top-right-radius: 5px;
-        -moz-border-radius-topleft: 5px;
-        -moz-border-radius-topright: 5px;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
-
     body .admin {
         background-color: #4b4b4b;
     }
@@ -392,16 +402,6 @@
 
     .course {
         background-color: rgba(255, 255, 255, 0.95) !important;
-    }
-
-    .badge-coekku {
-        color: white;
-        background-color: #801364 !important;
-    }
-
-    .badge-lca {
-        color: white;
-        background-color: #20639B !important;
     }
 
     .course-bg {
@@ -525,4 +525,35 @@
         .sidenav a {
             font-size: 18px;
         }
+    }
+
+    /* Rating Star Widgets Style */
+    .rating-stars ul {
+        list-style-type: none;
+        padding: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .rating-stars ul>li.star {
+        display: inline-block;
+
+    }
+
+    /* Idle State of the stars */
+    .rating-stars ul>li.star>i.fas {
+        font-size: 1em;
+        /* Change the size of the stars */
+        color: #ccc;
+        /* Color on idle state */
+    }
+
+    /* Hover state of the stars */
+    .rating-stars ul>li.star.hover>i.fas {
+        color: #FFCC36;
+    }
+
+    /* Selected state of the stars */
+    .rating-stars ul>li.star.selected>i.fas {
+        color: #FF912C;
     }

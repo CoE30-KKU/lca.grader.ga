@@ -7,6 +7,7 @@
                 <tr class="text-nowrap">
                     <th scope="col" class="font-weight-bold text-coekku text-right">ID</th>
                     <th scope="col" class="font-weight-bold text-coekku">Task</th>
+                    <th scope="col" class="font-weight-bold text-coekku">Author</th>
                     <th scope="col" class="font-weight-bold text-coekku">Rate</th>
                     <th scope="col" class="font-weight-bold text-coekku">Result</th>
                 </tr>
@@ -14,13 +15,13 @@
             <tbody class="text-nowrap">
                 <?php
                 $html = "";
-                if ($stmt = $conn -> prepare("SELECT id,name,properties,codename FROM `problem` ORDER BY id")) {
+                if ($stmt = $conn -> prepare("SELECT problem.id,problem.codename,problem.name as name,problem.score,problem.author,problem.properties,user.name as username FROM problem INNER JOIN user WHERE user.std_id = problem.author ORDER BY problem.id")) {
                     //$stmt->bind_param('ii', $page, $limit);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            $id = $row['id']; $name = $row['name']; $codename = $row['codename'];
+                            $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $author = $row['author']; $user = $row['username'];
                             
                             $prop = json_decode($row['properties'],true);
                             $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
@@ -31,6 +32,7 @@
                                 $html .= "<tr onclick='window.open(\"../problem/$id\")'>
                                     <th class='text-right' scope='row'><a href=\"../problem/$id\" target=\"_blank\">$id</a></th>
                                     <td><a href=\"../problem/$id\" target=\"_blank\">$name <span class='badge badge-coekku'>$codename</span></a></td>
+                                    <td>$user <span class='badge badge-coekku'>$author</span></td>
                                     <td data-order='".$rate."'>".rating($rate)."</td>
                                     <td><code>$lastResult</code></td>
                                 </tr>";

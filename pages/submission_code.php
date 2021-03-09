@@ -13,7 +13,7 @@
                     $r = str_replace("<", "&lt;", $r); //Make browser don't think < is the start of html tag
                     $r = str_replace(">", "&gt;", $r); //Make browser don't think < is the end of html tag
                     echo ($r);
-                    if ($row['comment'] != "End of Test") {
+                    if ($row['comment'] != "End of Test" && !empty($row['comment'])) {
                         echo "\n\n\n//--------------------[JUDGE RESPONSE]--------------------\n" . $row['comment'] . "\n//--------------------[JUDGE RESPONSE]--------------------";
                     }
                     die();

@@ -16,12 +16,11 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['std_id'] = $row['std_id'];
                 $_SESSION['name'] = $row['name'];
-                $_SESSION['admin'] = json_decode($row['properties'])->admin;
-               
                 $_SESSION['swal_success'] = "เข้าสู่ระบบสำเร็จ";
                 $_SESSION['swal_success_msg'] = "ยินดีต้อนรับ " . $row['name'] . "!";
-                if ($_SESSION['admin']) $_SESSION['swal_success_msg'] .= "Admin=" . $_SESSION['admin'];
 
+                $_properties = json_decode($row['properties'], true);
+                $_SESSION['admin'] = array_key_exists("admin", $_properties) ? $_properties["admin"] : false;
             }
         } else {
             $_SESSION['error'] = "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง";

@@ -32,13 +32,6 @@
                 <?php if (isset($_SESSION['id'])) { ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../static/elements/user.png" id="profile" class="rounded-circle" width="20" alt="Profile"> <?php echo $_SESSION['name']; ?></a>
-                    <script>
-                        var target = "https://ilp.kku.ac.th/Sac/FrontEnd/SacV2/student_photo.php?id=<?php echo $_SESSION['std_id']; ?>";
-                        $.get("https://ilp.kku.ac.th/Sac/FrontEnd/SacV2/student_photo.php?id=<?php echo $_SESSION['std_id']; ?>").done(function( data ) {
-                            $("#profile").html(data);
-                            alert( "Load was performed." );
-                        });
-                    </script>
                     <div class="dropdown-menu dropdown-menu-left dropdown-menu-md-right dropdown-coekku z-depth-1" aria-labelledby="navbarDropdown">
                         <!--a class="dropdown-item" href="../profile/"> แก้ไขข้อมูลส่วนตัว <i class="fas fa-user"></i></a>
                         <div class="dropdown-divider"></div-->

@@ -37,6 +37,7 @@
             });
         });
 </script>
+
 <!-- Popup Modal -->
 <div class="modal animated fade" id="modalPopup" name="modalPopup" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-notify modal-coekku modal-lg" role="document">

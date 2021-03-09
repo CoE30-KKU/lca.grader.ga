@@ -8,11 +8,10 @@
             $result = $stmt->get_result();
             if ($result->num_rows == 1) {
                 while ($row = $result->fetch_assoc()) {
-                    $probName = $row['name']; $probCodename = $row['codename']; $probScore = $row['score']; $probAuthor = $row['writer'];
+                    $probName = $row['name']; $probCodename = $row['codename']; $probScore = $row['score']; $probAuthor = $row['author'];
                     
                     $prop = json_decode($row['properties'], true);
 
-                    $accept = array_key_exists("accept", $prop) ? $prop["accept"] : null;
                     $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
                     $last_hide_updated = array_key_exists("last_hide_updated", $prop) ? $prop["last_hide_updated"] : time();
                     $probRate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
@@ -51,8 +50,8 @@
                     </div>
                     <div class="col-12 col-md-3">
                         <div class="md-form">
-                            <input type="text" id="writer" name="writer" class="form-control" disabled value="<?php if (!empty($probAuthor)) echo $probAuthor; else echo $_SESSION['rname']; ?>"/>
-                            <label class="form-label" for="writer">Author</label>
+                            <input type="text" id="author" name="author" class="form-control" disabled value="<?php if (!empty($probAuthor)) echo $probAuthor; else echo $_SESSION['name']; ?>"/>
+                            <label class="form-label" for="author">Author</label>
                         </div>
                     </div>
                 </div>
@@ -86,74 +85,27 @@
                     });
                     </script>
                     <iframe
-                        src="../vendor/pdf.js/web/viewer.html?file=../../../../../<?php echo $probDoc?>"
+                        src="../vendor/pdf.js/web/viewer.html?file=../../../<?php echo $probDoc?>"
                         width="100%" height="600" class="z-depth-1" id="pdfViewer" name="pdfViewer"></iframe>
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h5 class="font-weight-bold text-coekku">Config</h5>
-                            <div class="md-form">
-                            <label for="rating">Rating</label>
-                                <select class="mdb-select md-form colorful-select dropdown-primary" id="rating" name="rating" required>
-                                    <option value="0">Peaceful</option>
-                                    <option value="1">Easy</option>
-                                    <option value="2">Normal</option>
-                                    <option value="3">Hard</option>
-                                    <option value="4">Insane</option>
-                                    <option value="5">MERCILESS</option>
-                                </select>
-                                <script>
-                                    $('#rating option[value=<?php echo $probRate; ?>]').attr('selected', 'selected');
-                                </script>
-                            </div>
-                            <div class="md-form">
-                                <input type="text" id="score" name="score" class="form-control" value="<?php echo $probScore; ?>" required  placeholder="Default is 100"/>
-                                <label class="form-label" for="score">Score</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
                             <h5 class="font-weight-bold text-coekku">Language</h5>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="TXT" id="Plain Text" disabled name="lang[]">
-                                <label class="form-check-label" for="Plain Text">LCA Template (Plain Text)</label>
+                                <input class="form-check-input" type="checkbox" value="TXT" id="Plain Text" disabled checked name="lang[]">
+                                <label class="form-check-label" for="Plain Text">LCA Custom Template</label>
                             </div>
-                            <?php if (!isset($_GET['id']) || empty($accept)) { //Create case, check all by default ?>
-                                <script>$('input[type=checkbox][value=TXT]').prop('checked',true);</script>
-                            <?php } else { 
-                                foreach($accept as $a) { ?>
-                                <script>$('input[type=checkbox][value=<?php echo $a; ?>]').prop('checked',true);</script>
-                            <?php }
-                            } ?>
                         </div>
                     </div>
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h5 class="font-weight-bold text-coekku">Answer<small class="text-muted font-weight-light"> Accept only .zip</small>
-                            &nbsp;<a href="#guide" target="_blank"><i class="fas fa-question-circle"></i></a></h5>
-                            <?php if (isset($_GET['id'])) {
-                                $id = (int) $_GET['id'];
-                                $path = "../file/testcase/$id/";                                
-                                $count = 0;
-                                $files = glob($path . "*.{in,sol}", GLOB_BRACE);
-                                if ($files) {
-                                    echo "<ul>";
-                                    foreach($files as $f) {
-                                        $filename = str_replace($path, "", $f);
-                                        echo "<li><a href='$f'>".$filename."</a></li>";
-                                    }
-                                    echo "</ul>";
-                                }
-                            } ?>
-                            <input type="file" class="mb-2" accept=".zip" name="testcase" id="testcase"/>
-                            <input type="hidden" name="testcaseFile" id="testcaseFile" value="" />
-
+                            <h5 class="font-weight-bold text-coekku">Answer</small>&nbsp;
+                            <a href="#drive_url" target="_blank"><i class="fas fa-question-circle"></i></a></h5>
+                            <textarea class="form-control" id="answer" name="answer" rows="8" style="white-space: pre;" required></textarea>
+                            <input type="hidden" name="rating" id="rating" value="<?php echo $probRate; ?>"/>
                             <input type="hidden" name="hide" id="hide" value="<?php echo $hide; ?>"/>
                             <input type="hidden" name="last_hide_updated" id="last_hide_updated" value="<?php echo $last_hide_updated; ?>"/>
-                            
-                            <small class="text-danger">*การเปลี่ยนแปลงไฟล์จะเป็นการแทนที่ด้วยไฟล์ใหม่ทั้งหมด</small>
                         </div>
                     </div>
                     <button class="btn btn-coekku btn-block" type="submit" name="problem" value="<?php if (isset($_GET['id'])) echo "edit"; else echo "create"; ?>">Save</button>

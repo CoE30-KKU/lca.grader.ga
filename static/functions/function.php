@@ -11,8 +11,8 @@
     }
 
     function isAdmin($id, $conn) {
-        if (getUserdata($id, 'isAdmin', $conn)) return true;
-        return false;
+        $_properties = json_decode(getUserdata($id, 'properties', $conn), true);
+        return array_key_exists("admin", $_properties) ? $_properties['admin'] : false;
     }
 
     function getAnySQL($sql, $val, $key, $key_val, $conn) {
@@ -92,22 +92,14 @@
     }
 
     function rating($rate) {
-        switch($rate) {
-            case 0:
-                return "<text class='light-blue-text'>Peaceful</text>";
-            case 1:
-                return "<text class='text-primary'>Easy</text>";
-            case 2:
-                return "<text class='text-success'>Normal</text>";
-            case 3:
-                return "<text class='text-warning'>Hard</text>";
-            case 4:
-                return "<text class='text-danger'>Insane</text>";
-            case 5:
-                return "<text class='pink-text font-weight-bold'>Merciless</text>";
-            default:
-                return "<text class='text-muted'>Unrated</text>";
-        }
+        if ($rate >= 3)
+            return "<text class='text-warning'>Hard</text>";
+        else if ($rate >= 2)
+            return "<text class='text-success'>Normal</text>";
+        else if ($rate >= 1)
+            return "<text class='text-primary'>Easy</text>";
+        else
+            return "<text class='text-muted'>Unrated</text>";
     }
 
     function isPassed($uID, $pID, $conn) {
@@ -119,19 +111,22 @@
 
     function lastResult($uID, $pID, $conn) {
         $arr = lastSubmission($uID,$pID,$conn);
+        $subID = $arr['subID'];
         if (!$arr) return " "; //Case not any submission yet.
+        else if ($arr['result'] == 'W') return "<text data-wait=true data-sub-id='$subID'> รอผลตรวจ... " . "(" . ($arr['score']/$arr['maxScore'])*$arr['probScore'] . ")</text>";
         else return $arr['result'] . " (" . ($arr['score']/$arr['maxScore'])*$arr['probScore'] . ")";
     }
 
     function lastSubmission($uID, $pID, $conn) {
         if (!isValidUserID($uID, $conn) || !isValidProbID($pID, $conn)) return 0;
-        if ($stmt = $conn -> prepare("SELECT `submission`.`result` AS result,`submission`.`score` AS score,`submission`.`maxScore` AS maxScore,`problem`.`score` AS probScore FROM `submission` INNER JOIN `problem` ON `submission`.`problem` = `problem`.`id` WHERE problem = ? AND user = ? ORDER BY `submission`.`id` DESC limit 1")) {
+        if ($stmt = $conn -> prepare("SELECT `submission`.`id` AS subID, `submission`.`result` AS result,`submission`.`score` AS score,`submission`.`maxScore` AS maxScore,`problem`.`score` AS probScore FROM `submission` INNER JOIN `problem` ON `submission`.`problem` = `problem`.`id` WHERE problem = ? AND user = ? ORDER BY `submission`.`id` DESC limit 1")) {
             $stmt->bind_param('ii', $pID, $uID);
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows == 1) {
                 while ($row = $result->fetch_assoc()) {
                     $arr = array();
+                    $arr["subID"] = $row['subID'];
                     $arr["score"] = $row['score'];
                     $arr["maxScore"] = $row['maxScore'];
                     $arr["result"] = $row['result'];
@@ -148,10 +143,8 @@
     }
 
     function user($id, $conn) {
-        $rainbow = !empty(getUserdata($id,'properties',$conn)) ? json_decode(getUserdata($id,'properties',$conn))->rainbow : false;
-        $name = getUserdata($id, 'displayname', $conn);
-        if (isLogin() && isAdmin($_SESSION['id'], $conn))
-            $name .= " (".getUserdata($id,'username', $conn).")";
+        $rainbow = !empty(getUserdata($id,'properties',$conn)) ? array_key_exists("rainbow", json_decode(getUserdata($id,'properties',$conn),true)) : false;
+        $name = getUserdata($id, 'name', $conn) . " (".getUserdata($id,'std_id', $conn).")";
         if ($rainbow)
             $name = '<text class="rainbow">'. $name . '</text>';
         return $name;

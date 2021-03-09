@@ -16,13 +16,12 @@
                     <th scope="col" class="font-weight-bold text-coekku">Timestamp</th>
                     <th scope="col" class="font-weight-bold text-coekku">User</th>
                     <th scope="col" class="font-weight-bold text-coekku">Problem ID</th>
-                    <th scope="col" class="font-weight-bold text-coekku">Lang</th>
                     <th scope="col" class="font-weight-bold text-coekku">Result</th>
                 </tr>
             </thead>
             <tbody class="text-nowrap">
                 <?php
-                    if ($stmt = $conn -> prepare("SELECT `submission`.`id` as id, `submission`.`user` as user, `submission`.`problem` as problem, `submission`.`lang` as lang, `submission`.`result` as result, `submission`.`score` as score, `submission`.`maxScore` as maxScore, `submission`.`uploadtime` as uploadtime, `problem`.`score` as probScore FROM `submission` INNER JOIN `problem` ON `problem`.`id` = `submission`.`problem` ORDER BY `submission`.`id` DESC")) {
+                    if ($stmt = $conn -> prepare("SELECT `submission`.`id` as id, `submission`.`user` as user, `submission`.`problem` as problem, `submission`.`result` as result, `submission`.`score` as score, `submission`.`maxScore` as maxScore, `submission`.`uploadtime` as uploadtime, `problem`.`score` as probScore FROM `submission` INNER JOIN `problem` ON `problem`.`id` = `submission`.`problem` ORDER BY `submission`.`id` DESC")) {
                         //$stmt->bind_param('ii', $page, $limit);
                         $stmt->execute();
                         $result = $stmt->get_result();
@@ -33,7 +32,6 @@
                                 $subID = $row['id'];
                                 $subUser = user($row['user'], $conn);
                                 $subProb = $row['problem'];
-                                $subLang = $row['lang'];
                                 $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
                                 $subScore = ($row['score']/$row['maxScore'])*$row['probScore'];
                                 //$subRuntime = $row['runningtime']/1000;
@@ -44,7 +42,6 @@
                                     <td data-order='<?php echo $i; ?>'><?php echo $subUploadtime; ?></td>
                                     <td><?php echo $subUser ?></td>
                                     <td><?php echo prob($subProb, $conn); ?></td>
-                                    <td><?php echo $subLang; ?></td>
                                     <td <?php if ($row['result'] == 'W') echo "data-wait=true data-sub-id='$subID'"; ?>><code><?php echo $subResult . " ($subScore)";?></code></td>
                                 </tr>
                             <?php }
@@ -64,7 +61,7 @@
             $('.dataTables_length').addClass('bs-select');
             $("#onlyme").change(function() {
                 if ($(this).is(':checked')) {
-                    submission_table.search("<?php if (isset($_SESSION['id'])) echo getUserdata($_SESSION['id'],'username', $conn); else echo ""; ?>").draw();
+                    submission_table.search("<?php if (isset($_SESSION['std_id'])) echo $_SESSION['std_id']; ?>").draw();
                 } else {
                     submission_table.search("").draw();
                 }

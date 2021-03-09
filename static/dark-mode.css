@@ -69,25 +69,24 @@
 }
 
 [data-theme="dark"] a {
-    color:#d42225;
-    transition: 0.3s;
-}
-
-[data-theme="dark"] tr a {
-    color:#d42225 !important;
+    color: #ff8ae2;
     transition: 0.3s;
 }
 
 [data-theme="dark"] a:hover {
-    color: #df797b;
+    color: #c4289d;
+    transition: 0.3s;
+}
+
+[data-theme="dark"] tr a {
+    color: #ff8ae2 !important;
     transition: 0.3s;
 }
 
 [data-theme="dark"] tr a:hover {
-    color: #df797b !important;
+    color: #c4289d !important;
     transition: 0.3s;
 }
-
 
 [data-theme="dark"] ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
@@ -161,4 +160,48 @@
     [data-theme="dark"] .navbar {
         background-color: #111 !important;
     }
+}
+
+[data-theme="dark"] .bg-coekku {
+    background-color: #e73abc;
+    color: white;
+}
+
+[data-theme="dark"] .modal-coekku .modal-header {
+    padding: 9px 15px;
+    border-bottom: 1px solid #eee;
+    color: white;
+    background-color: #e73abc;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+[data-theme="dark"] .badge-coekku {
+    color: white;
+    background-color: #e73abc !important;
+}
+
+[data-theme="dark"] .badge-lca {
+    color: white;
+    background-color: #20639B !important;
+}
+
+[data-theme="dark"] .btn-coekku {
+    color: white !important;
+    background-color: #e73abc !important;
+    transition: 0.3s;
+}
+
+[data-theme="dark"] .btn-coekku:hover {
+    color: white !important;
+    background-color: #9e4187 !important;
+}
+
+[data-theme="dark"] .text-coekku {
+    color: #e73abc !important;
+    transition: 0.3s;
 }
