@@ -15,6 +15,19 @@
         return (isAdmin($_SESSION['id'], $conn) || strcmp($_SESSION['std_id'], getProbdata($probID, 'author', $conn)) == 0);
     }
 
+    function countCategory($category, $conn) {
+        if ($stmt = $conn-> prepare("SELECT count(id) AS cat FROM `editorial` WHERE JSON_EXTRACT(`properties`,'$.hide') = false AND JSON_EXTRACT(`properties`,'$.category') = ? ORDER BY JSON_EXTRACT(`properties`,'$.last_hide_updated')")) {
+        $stmt->bind_param('s', $category);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows == 1) {
+                while ($row = $result->fetch_assoc()) {
+                    return $row["cat"];
+                }
+            }
+        }
+    }
+
     function isAdmin($id, $conn) {
         $_properties = json_decode(getUserdata($id, 'properties', $conn), true);
         return array_key_exists("admin", $_properties) ? $_properties['admin'] : false;

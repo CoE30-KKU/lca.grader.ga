@@ -17,7 +17,11 @@ RewriteRule ^scoreboard/([0-9]+)$ pages/page_loader.php?target=contest_scoreboar
 RewriteRule ^profile/$ pages/page_loader.php?target=profile.php
 RewriteRule ^profile/([0-9]+)$ pages/page_loader.php?target=profile.php&id=$1 [L]
 RewriteRule ^editorial/$ pages/page_loader.php?target=editorial.php
-RewriteRule ^editorial/([0-9]+)$ pages/page_loader.php?target=editorial.php&id=$1 [L]
+RewriteRule ^editorial/([0-9]+)$ pages/page_loader.php?target=editorial_id.php&id=$1 [L]
+RewriteRule ^editorial/search=(.*)$ pages/page_loader.php?target=editorial.php&search=$1 [L]
+RewriteRule ^editorial/category=(.*)$ pages/page_loader.php?target=editorial.php&category=$1 [L]
+RewriteRule ^editorial/create$ pages/page_loader.php?target=editorial_edit.php [L]
+RewriteRule ^editorial/edit-([0-9]+)$ pages/page_loader.php?target=editorial_edit.php&id=$1 [L]
 RewriteRule ^donation/$ pages/page_loader.php?target=donation.php [L]
 
 RewriteRule ^api/(.*)$ static/functions/api/$1.php
