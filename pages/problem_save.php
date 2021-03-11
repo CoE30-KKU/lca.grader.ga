@@ -25,14 +25,14 @@
                 die();
             }
 
+            $locate ="../file/judge/prob/$id/";
+            if (!file_exists($locate))
+                if (!mkdir($locate))
+                    die("Can't mkdir");
+
             if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
                 $name_file = $probCodename . ".pdf";
                 $tmp_name = $_FILES['pdfPreview']['tmp_name'];
-                $locate ="../file/judge/prob/$id/";
-                if (!file_exists($locate))
-                    if (!mkdir($locate))
-                        die("Can't mkdir");
-                
                 if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
             }
 
