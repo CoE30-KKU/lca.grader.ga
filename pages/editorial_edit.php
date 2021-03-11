@@ -49,8 +49,8 @@
                                 <label for="category">Category</label>
                                 <select class="mdb-select md-form colorful-select dropdown-primary" id="category" name="category" required>
                                     <optgroup label="- หมวดทั่วไป -" id="general">
-                                        <option value="general">General</option>
-                                        <option value="update">Update</option>
+                                        <option value="General">General</option>
+                                        <option value="Update">Update</option>
                                     </optgroup>
                                     <optgroup label="- หมวดโปรแกรมมิ่ง -" id="general">
                                         <option value="C">C และ C++</option>

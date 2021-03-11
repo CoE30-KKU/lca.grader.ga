@@ -7,7 +7,7 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
     $pass = $_POST['login_password']; //Student ID
 
     //ดึงข้อมูลมาเช็คว่า $User ที่ตั้งรหัสผ่านเป็น $Pass มีในระบบรึเปล่า
-    if ($stmt = $conn -> prepare('SELECT * FROM `user` WHERE email = ? AND std_id = ? LIMIT 1')) {
+    if ($stmt = $conn -> prepare('SELECT * FROM `user` WHERE email = ? AND password = ? LIMIT 1')) {
         $stmt->bind_param('ss', $user, $pass);
         $stmt->execute();
         $result = $stmt->get_result();
