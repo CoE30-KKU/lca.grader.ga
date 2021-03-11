@@ -15,8 +15,9 @@
         print_r($_POST);
 
         if (!empty($pass)) {
+            $pass = md5($pass);
             $stmt = $conn->prepare("UPDATE `user` SET email=?, profile=?, password=? WHERE id = ?");
-            $stmt->bind_param('sssi', $email, $profile_url, md5($pass), $id);
+            $stmt->bind_param('sssi', $email, $profile_url, $pass, $id);
         } else {
             $stmt = $conn->prepare("UPDATE `user` SET email=?, profile=? WHERE id = ?");
             $stmt->bind_param('ssi', $email, $profile_url, $id);
@@ -31,6 +32,7 @@
             $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้\n$conn->error";
             echo "Can't establish database";
         }
-        die();
+
+        header("Location: ../profile/");
     }
 ?>
