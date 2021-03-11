@@ -44,7 +44,13 @@
                     while ($row = $result->fetch_assoc()) {
                         $postid = $row['id'];
                         $posttitle = $row['title'];
-                        $postarticle = $row['article'];
+
+                        $Parsedown = new Parsedown();
+                        $html = $Parsedown->text($row['article']);
+                        $html = str_replace("\n","<br>",$html);
+                        $html = str_replace("<img ","<img class='img-fluid' ",$html);
+                        $postarticle = explode("<br>", $html);
+
                         $prop = json_decode($row['properties'], true); 
                 
                         $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
@@ -57,7 +63,7 @@
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <h5 class="font-weight-bold text-coekku"><?php echo $posttitle; ?> <span class='badge badge-coekku'><?php echo strtoupper($category); ?></span></h5>
-                                    <p><?php echo iconv_substr($postarticle,0,200,'UTF-8'); if (strlen($postarticle) > 200) echo '<a href="#">อ่านเพิ่มเติม</a>'; ?></p>
+                                    <p><?php echo $postarticle[0]; echo "...<a href=\"../editorial/$postid\">อ่านเพิ่มเติม</a>"; ?></p>
                                     <small class="text-muted"><?php echo $author; ?></small>
                                 </div>
                             </div>

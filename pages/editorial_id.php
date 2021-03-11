@@ -44,7 +44,10 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <?php $Parsedown = new Parsedown();
-                        echo str_replace("\n","<br>", $Parsedown->text($article));
+                        $html = $Parsedown->text($article);
+                        $html = str_replace("\n","<br>",$html);
+                        $html = str_replace("<img ","<img class='img-fluid' ",$html);
+                        echo $html;
                         ?>
                     </div>
                 </div>

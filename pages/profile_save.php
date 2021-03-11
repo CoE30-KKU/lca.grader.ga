@@ -32,7 +32,6 @@
             $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้\n$conn->error";
             echo "Can't establish database";
         }
-
-        header("Location: ../profile/");
     }
+    header("Location: ../profile/");
 ?>
