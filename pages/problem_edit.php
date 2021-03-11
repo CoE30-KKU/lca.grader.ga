@@ -1,5 +1,5 @@
 <?php needLogin();
-    $probName = "";$probCodename = ""; $probScore = 100; $probRate = ""; $id = -1; $accept = ""; $hide = 0; $last_hide_updated = time();
+    $probName = "";$probCodename = ""; $probScore = 100; $probRate = ""; $id = -1; $accept = ""; $hide = 0; $last_hide_updated = time(); $answer = "";
     if (isset($_GET['id'])) {
         needOwner($_GET['id'], $conn);
         $id = (int) $_GET['id'];
@@ -25,14 +25,13 @@
         } else {
             header("Location: ../problem/");
         }
+        $answer = fread(fopen("../file/judge/prob/$id/answer.txt","r"), filesize("../file/judge/prob/$id/answer.txt"));
+
     }
     $probDoc = "static/elements/demo.pdf";
     if (isset($probCodename) && !empty($probCodename)) {
         $probDoc = "doc/$id-$probCodename";
     }
-    
-    $answer = fread(fopen("../file/judge/prob/$id/answer.txt","r"), filesize("../file/judge/prob/$id/answer.txt"));
-
 
 ?>
 <div class="container" style="padding-top: 88px;">
