@@ -9,7 +9,7 @@
                     <a class="btn btn-coekku" href="../problem/">เริ่มทำโจทย์กันเลย !</a>
                     <a class="btn btn-coekku" target="_blank" href="https://drive.google.com/file/d/19aNSPCPxMvg8BQVI9z_P9ELP4OmLSEtO/view?usp=drivesdk">วิธีการใช้งาน Grader.ga</a>
                     <?php
-                    if ($stmt = $conn -> prepare("SELECT `codename`,`id`,`name`,`properties` FROM `problem` WHERE JSON_EXTRACT(`properties`,'$.hide') = 0 AND UNIX_TIMESTAMP() - JSON_EXTRACT(`properties`,'$.last_hide_updated') <= 604800 AND JSON_EXTRACT(`properties`,'$.last_hide_updated') > 0 ORDER BY JSON_EXTRACT(`properties`,'$.last_hide_updated') DESC limit 7")) {
+                    if ($stmt = $conn -> prepare("SELECT `codename`,`id`,`name`,`properties` FROM `problem` WHERE JSON_EXTRACT(`properties`,'$.hide') = false AND UNIX_TIMESTAMP() - JSON_EXTRACT(`properties`,'$.last_hide_updated') <= 604800 AND JSON_EXTRACT(`properties`,'$.last_hide_updated') > 0 ORDER BY JSON_EXTRACT(`properties`,'$.last_hide_updated') DESC limit 7")) {
                         $stmt->execute();
                         $result = $stmt->get_result();
                         if ($result->num_rows > 0) { $html = "";?>
