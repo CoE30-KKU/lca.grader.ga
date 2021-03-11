@@ -1,6 +1,7 @@
-<?php needAdmin($conn); 
+<?php needLogin();
     $probName = "";$probCodename = ""; $probScore = 100; $probRate = ""; $id = -1; $accept = ""; $hide = 0; $last_hide_updated = time();
     if (isset($_GET['id'])) {
+        needOwner($_GET['id'], $conn);
         $id = (int) $_GET['id'];
         if ($stmt = $conn -> prepare("SELECT * FROM `problem` WHERE id = ?")) {
             $stmt->bind_param('i', $id);

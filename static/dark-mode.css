@@ -69,22 +69,22 @@
 }
 
 [data-theme="dark"] a {
-    color: #ff8ae2;
+    color: #f0a2b4;
     transition: 0.3s;
 }
 
 [data-theme="dark"] a:hover {
-    color: #c4289d;
+    color: #c47384;
     transition: 0.3s;
 }
 
 [data-theme="dark"] tr a {
-    color: #ff8ae2 !important;
+    color: #f0a2b4 !important;
     transition: 0.3s;
 }
 
 [data-theme="dark"] tr a:hover {
-    color: #c4289d !important;
+    color: #c47384 !important;
     transition: 0.3s;
 }
 
@@ -163,7 +163,7 @@
 }
 
 [data-theme="dark"] .bg-coekku {
-    background-color: #e73abc;
+    background-color:#f0a2b4;
     color: white;
 }
 
@@ -171,7 +171,7 @@
     padding: 9px 15px;
     border-bottom: 1px solid #eee;
     color: white;
-    background-color: #e73abc;
+    background-color:#f0a2b4;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
@@ -182,7 +182,7 @@
 
 [data-theme="dark"] .badge-coekku {
     color: white;
-    background-color: #e73abc !important;
+    background-color:#f0a2b4 !important;
 }
 
 [data-theme="dark"] .badge-lca {
@@ -191,17 +191,17 @@
 }
 
 [data-theme="dark"] .btn-coekku {
-    color: white !important;
-    background-color: #e73abc !important;
+    color: black !important;
+    background-color:#f0a2b4 !important;
     transition: 0.3s;
 }
 
 [data-theme="dark"] .btn-coekku:hover {
-    color: white !important;
-    background-color: #9e4187 !important;
+    color: black  !important;
+    background-color: #c47384 !important;
 }
 
 [data-theme="dark"] .text-coekku {
-    color: #e73abc !important;
+    color:#f0a2b4 !important;
     transition: 0.3s;
 }

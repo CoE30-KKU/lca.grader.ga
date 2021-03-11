@@ -45,7 +45,7 @@
                     $stmt->bind_param('ssss', $probName, $probCodename, $probAuthor, $properties);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                        $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
+                        $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้\n$conn->error";
                         echo $conn->error;
                     } else {
                         $_SESSION['swal_success'] = "สำเร็จ!";
@@ -54,7 +54,7 @@
                     }
                 } else {
                     $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                    $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
+                    $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้\n$conn->error";
                     echo "Can't establish database";
                 }
             } else {
@@ -62,7 +62,7 @@
                     $stmt->bind_param('ssssi', $probName, $probCodename, $probAuthor, $properties, $id);
                     if (!$stmt->execute()) {
                         $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                        $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้";
+                        $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้";
                         die($conn->error);
                     } else {
                         $_SESSION['swal_success'] = "สำเร็จ!";
@@ -71,7 +71,7 @@
                     }
                 } else {
                     $_SESSION['swal_error'] = "พบข้อผิดพลาด";
-                    $_SESSION['swal_error_msg'] = "ไม่สามารถ Query Database ได้\n$conn->error";
+                    $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้\n$conn->error";
                     echo "Can't establish database";
                 }
             }

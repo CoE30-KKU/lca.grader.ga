@@ -10,6 +10,11 @@
         return false;
     }
 
+    function isOwner($probID, $conn) {
+        if (!isLogin()) return false;
+        return (isAdmin($_SESSION['id'], $conn) || strcmp($_SESSION['std_id'], getProbdata($probID, 'author', $conn)) == 0);
+    }
+
     function isAdmin($id, $conn) {
         $_properties = json_decode(getUserdata($id, 'properties', $conn), true);
         return array_key_exists("admin", $_properties) ? $_properties['admin'] : false;
@@ -111,9 +116,9 @@
 
     function lastResult($uID, $pID, $conn) {
         $arr = lastSubmission($uID,$pID,$conn);
-        $subID = $arr['subID'];
         if (!$arr) return " "; //Case not any submission yet.
-        else if ($arr['result'] == 'W') return "<text data-wait=true data-sub-id='$subID'> รอผลตรวจ... " . "(" . ($arr['score']/$arr['maxScore'])*$arr['probScore'] . ")</text>";
+        $subID = $arr["subID"];
+        if ($arr['result'] == 'W') return "<text data-wait=true data-sub-id='$subID'> รอผลตรวจ... " . "(" . ($arr['score']/$arr['maxScore'])*$arr['probScore'] . ")</text>";
         else return $arr['result'] . " (" . ($arr['score']/$arr['maxScore'])*$arr['probScore'] . ")";
     }
 
@@ -126,7 +131,7 @@
             if ($result->num_rows == 1) {
                 while ($row = $result->fetch_assoc()) {
                     $arr = array();
-                    $arr["subID"] = $row['subID'];
+                    $arr["subID"] = $row["subID"];
                     $arr["score"] = $row['score'];
                     $arr["maxScore"] = $row['maxScore'];
                     $arr["result"] = $row['result'];
@@ -264,7 +269,23 @@
     });
 </script>
 <?php die(); }} ?>
-
+<?php
+    function needOwner($probID, $conn) {
+    if (!isLogin()) { needLogin(); die(); return false; }
+    if (!isOwner($probID, $conn)) { ?>
+<script>
+    swal({
+        title: "ACCESS DENIED",
+        text: "You don't have enough permission!",
+        icon: "warning"
+    }).then(function () {
+        window.history.back();
+    });
+</script>
+<?php die(); return false;}
+        return true;
+    }
+?>
 <?php
     function needAdmin($conn) {
     if (!isLogin()) { needLogin(); die(); return false; }
@@ -274,6 +295,8 @@
         title: "ACCESS DENIED",
         text: "You don't have enough permission!",
         icon: "warning"
+    }).then(function () {
+        window.history.back();
     });
 </script>
 <?php die(); return false;}

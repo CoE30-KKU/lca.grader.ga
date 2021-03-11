@@ -12,7 +12,7 @@
                 $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
                 $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
 
-                $owner = (isLogin() && (isAdmin($_SESSION['id'], $conn) || strcmp($_SESSION['std_id'], $author) == 0)) ? true : false;
+                $owner = isOwner($id, $conn);
 
                 if ($hide && (!isLogin() || (!isAdmin($_SESSION['id'], $conn) && strcmp($_SESSION['std_id'], $author) !== 0)))
                     header("Location: ../problem/");
