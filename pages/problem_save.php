@@ -22,7 +22,6 @@
                 $_SESSION['swal_error'] = "ACCESS DENIED";
                 $_SESSION['swal_error_msg'] = "You don't have enough permission!";
                 header("Location: ../problem/");
-                die();
             }
 
             $locate ="../file/judge/prob/$id/";

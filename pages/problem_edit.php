@@ -30,6 +30,9 @@
     if (isset($probCodename) && !empty($probCodename)) {
         $probDoc = "doc/$id-$probCodename";
     }
+    
+    $answer = fread(fopen("../file/judge/prob/$id/answer.txt","r"), filesize("../file/judge/prob/$id/answer.txt"));
+
 
 ?>
 <div class="container" style="padding-top: 88px;">
@@ -103,7 +106,7 @@
                         <div class="card-body">
                             <h5 class="font-weight-bold text-coekku">Answer</small>&nbsp;
                             <a href="#drive_url" target="_blank"><i class="fas fa-question-circle"></i></a></h5>
-                            <textarea class="form-control" id="answer" name="answer" rows="8" style="white-space: pre;" required></textarea>
+                            <textarea class="form-control" id="answer" name="answer" rows="8" style="white-space: pre;" required><?php echo $answer; ?></textarea>
                             <input type="hidden" name="rating" id="rating" value="<?php echo $probRate; ?>"/>
                             <input type="hidden" name="hide" id="hide" value="<?php echo $hide; ?>"/>
                             <input type="hidden" name="last_hide_updated" id="last_hide_updated" value="<?php echo $last_hide_updated; ?>"/>
