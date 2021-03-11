@@ -182,6 +182,21 @@
         $files = glob("../static/elements/loading/$targetDir/*.*", GLOB_BRACE);
         return $files[rand(0,count($files)-1)];
     }
+
+    function getProfileIMG($conn) {
+        if (!isLogin()) return "../static/elements/user.png";
+        $uid = $_SESSION['id'];
+        if ($stmt = $conn -> prepare("SELECT `profile` FROM `user` WHERE id = ?")) {
+            $stmt->bind_param('i', $uid);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows == 1) {
+                while ($row = $result->fetch_assoc()) {
+                    return (!empty($row['profile']) ? $row['profile'] : "../static/elements/user.png");
+                }
+            }
+        }
+    }
 ?>
 <?php
     function getClientIP() {

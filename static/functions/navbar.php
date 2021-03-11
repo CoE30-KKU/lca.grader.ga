@@ -31,7 +31,7 @@
                 </li>
                 <?php if (isset($_SESSION['id'])) { ?>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../static/elements/user.png" id="profile" class="rounded-circle" width="20" alt="Profile"> <?php echo $_SESSION['name']; ?></a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo getProfileIMG($conn); ?>" id="profile" class="rounded-circle" width="20" alt="Profile"> <?php echo $_SESSION['name']; ?></a>
                     <div class="dropdown-menu dropdown-menu-left dropdown-menu-md-right dropdown-coekku z-depth-1" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="../profile/"> แก้ไขข้อมูลส่วนตัว <i class="fas fa-user"></i></a>
                         <div class="dropdown-divider"></div>
