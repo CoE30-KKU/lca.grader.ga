@@ -10,12 +10,12 @@ require_once '../../../vendor/PHPMailer/SMTP.php';
 // Form details
 $email_to = $_GET['email'];
 
-$fullname = "<<NAME SENDER HERE>>"; // required
-$email_from = "<<EMAIL SENDER HERE>>"; // required
+$fullname = "Grader.ga"; // required
+$email_from = "palapon.soontornpas@gmail.com"; // required
 $subject = "สวัสดี! " . $_GET['name']; // required
-$message = "กรุณายืนยันตัวตนเพื่อปลดล็อกการใช้งานฟังก์ชั่นบางอย่างในเว็บไซต์"; // required
+$message = "คุณได้ทำการส่งคำร้องขอรีเซ็ตรหัสผ่านเพื่อเข้าใช้งานเว็บไซต์"; // required
 
-$email_message = file_get_contents('email.html');
+$email_message = file_get_contents('resetpassword.html');
 $email_message = str_replace("{{name}}", $_GET['name'], $email_message);
 $email_message = str_replace("{{key}}", $_GET['key'], $email_message);
 $email_message = str_replace("{{email}}", $_GET['email'], $email_message);
@@ -35,13 +35,13 @@ try {
     $mail->isHTML(true);
     $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = '<<EMAIL SENDER HERE>>';                     // SMTP username
-    $mail->Password   = '<<PASSWORD SENDER HERE>>';                               // SMTP password
+    $mail->Username   = 'palapon.soontornpas@gmail.com';                     // SMTP username
+    $mail->Password   = '11032545';                               // SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
     $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
     //Recipients
-    $mail->setFrom($email_from, 'WE ARE SMD');
+    $mail->setFrom($email_from, 'Computer_MVSK');
     $mail->addAddress($email_to, $fullname);     // Add the recipient
 
     //Content
@@ -50,17 +50,11 @@ try {
     $mail->Body    = $email_message;
 
     $mail->send();
-    if (isset($_GET['method'])) {
-        if ($_GET['method'] == "reg") {
-            header("Location: ../../home");    
-        } else if ($_GET['method'] == "changeEmail") {
-            //Something could be happen here next day...
-            $_SESSION['swal_warning'] = "คุณได้ทำการเปลี่ยนแปลงอีเมล";
-            $_SESSION['swal_warning_msg'] = "อย่าลืมเข้าไปยืนยันตัวตนด้วยอีเมลใหม่ด้วยนะครับ";
-        }
-    } else {
-        echo "SUCCESS";
-    }
+
+    $_SESSION['swal_success'] = "รีเซ็ตรหัสผ่านสำเร็จ";
+    $_SESSION['swal_success_msg'] = "กรุณาตรวจสอบที่อีเมล " . $email . " ของท่านเพื่อดำเนินการต่อ";
+    header("Location: ../../../home/");
+    
 } catch (Exception $e) {
     die("ERROR! Mailer Error: $mail->ErrorInfo");
 }

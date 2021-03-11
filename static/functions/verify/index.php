@@ -12,11 +12,11 @@
     if (mysqli_num_rows($result1) == 0) {
         $_SESSION['swal_error'] = "ยืนยันอีเมลไม่สำเร็จ";
         $_SESSION['swal_error_msg'] = "พบข้อผิดพลาด: ข้อมูลไม่ตรงกับฐานข้อมูล";
-        header("Location: ../../home");
+        header("Location: ../../../home/");
     } else if (getUserdata($id, 'isEmailVerify', $conn)) {
         $_SESSION['swal_warning'] = "คุณได้ยืนยันอีเมลไปแล้ว";
         $_SESSION['swal_warning_msg'] = "ไม่มีความจำเป็นที่จะต้องยืนยันอีเมลซ้ำอีกครั้ง";
-        header("Location: ../../home");
+        header("Location: ../../../home/");
     } else {
         $query = "UPDATE `user` SET isEmailVerify = true WHERE email = '$email'";
         $result = mysqli_query($conn, $query);
@@ -24,9 +24,9 @@
             die('Could not get data: ' . mysqli_error($conn));
         }
         if (!isLogin()) {
-            header("Location: ../login.php?user=".getUserdata($id, 'username', $conn)."&pass=".getUserdata($id, 'password', $conn)."&method=email");
+            header("Location: ../auth/login.php?user=".getUserdata($id, 'username', $conn)."&pass=".getUserdata($id, 'password', $conn)."&method=email");
         } else {
-            header("Location: ../../home");
+            header("Location: ../../../home/");
         }
     }
 ?>
