@@ -1,5 +1,5 @@
 <?php
-    $html = ""; $id = $_GET['id'];
+    $id = $_GET['id'];
     if ($stmt = $conn -> prepare("SELECT * FROM `problem` WHERE id = ?")) {
         $stmt->bind_param('i', $id);
         $stmt->execute();

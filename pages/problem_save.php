@@ -3,7 +3,7 @@
     require_once '../static/functions/function.php';
 
     $id = "";
-    if (isLogin() && isAdmin($_SESSION['id'], $conn)) {
+    if (isLogin()) {
         if (isset($_POST['problem'])) {
             $isCreate = $_POST['problem'] == "create" ? 1 : 0; //Create(true) or Edit(false)
             $probName = $_POST['name'];
@@ -17,6 +17,13 @@
             ));
             
             $id = $isCreate ? latestIncrement($dbdatabase, 'problem', $conn) : $_GET['id'];
+
+            if (!$isCreate && !isOwner($id, $conn)) {
+                $_SESSION['swal_error'] = "ACCESS DENIED";
+                $_SESSION['swal_error_msg'] = "You don't have enough permission!";
+                header("Location: ../problem/");
+                die();
+            }
 
             if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
                 $name_file = $probCodename . ".pdf";
