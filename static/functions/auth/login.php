@@ -4,7 +4,7 @@
 
 if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
     $user = $_POST['login_username']; //Email
-    $pass = $_POST['login_password']; //Student ID
+    $pass = md5($_POST['login_password']); //Student ID
 
     //ดึงข้อมูลมาเช็คว่า $User ที่ตั้งรหัสผ่านเป็น $Pass มีในระบบรึเปล่า
     if ($stmt = $conn -> prepare('SELECT * FROM `user` WHERE email = ? AND password = ? LIMIT 1')) {
