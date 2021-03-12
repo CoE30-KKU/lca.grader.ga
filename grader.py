@@ -9,31 +9,28 @@ dbconnector = mysql.connector.connect(
     host='203.159.94.111',
     user='graderga',
     password='8db!#yYvK]8Lw6F|37wz:UwU',
-    database='graderga'
+    database='lca.grader.ga'
 )
 
 def getTimeAndMem(idTask):
-    response = requests.get(f"http://api.11th.studio/graderga/problem?id={idTask}")
+    response = requests.get(f"http://api.11th.studio/lcagraderga/problem?id={idTask}")
     if response.status_code != 200:
         return -69,-420
     data = response.json()[0]
     return data["time"],data["memory"]
 
 def getWaitSubmission():
-    response = requests.get("http://api.11th.studio/graderga/submission?wait&key=34f0ed90a60bc669bde9ae3bf44a16a3")
+    response = requests.get("http://api.11th.studio/lcagraderga/submission?wait&key=34f0ed90a60bc669bde9ae3bf44a16a3")
     if response.status_code != 200:
         return []
     return response.json()
 
-
-
-
 if __name__ == '__main__':
     
     mycursor = dbconnector.cursor(buffered=True)
-    webLocation = "/" + path.join("var","www","grader.ga")
+    webLocation = "/" + path.join("var","www","lca.grader.ga")
 
-    print("Grader.py started")
+    print("LCA.Grader.py started")
 
     while(1):
         queue = getWaitSubmission()
@@ -46,7 +43,7 @@ if __name__ == '__main__':
             subID = myresult['id'] #id is the 1st.
             userID = myresult['user'] #user is the 2nd.
             probID = str(myresult['problem']) #problem is the 3rd.
-            lang = myresult['lang'] #lang is the 4th.
+            lang = "TXT" #lang is the 4th.
             userCodeLocation = myresult['script'].replace("..",webLocation) #script location is the 5th.
             #userCodeLocation in format "../file/judge/upload/<User ID>/<Codename>-<EPOCH>.<lang>", real location need change "../" to webLocation
             #Full path: /var/www/grader.ga/file/judge/upload/<User ID>/<Codename>-<EPOCH>.<lang>
@@ -62,12 +59,7 @@ if __name__ == '__main__':
             with open(userCodeLocation,"r") as f:
                 srcCode = f.read()
 
-            probTime,probMem = getTimeAndMem(probID)
-
-            if probTime < 0:
-                judgeResult = ("WebError",0,100,0,0,"Web API Down")
-            else:
-                judgeResult = Judge.judge(probID,lang,probTestcaseLocation,srcCode)
+            judgeResult = Judge.judge(probID,lang,probTestcaseLocation,srcCode)
             #Result from judge
             result = judgeResult[0]
             score = int(judgeResult[1])
@@ -77,8 +69,8 @@ if __name__ == '__main__':
             comment = judgeResult[5]
 
             #Update to SQL
-            query = ("UPDATE `submission` SET `result` = %s,`score` = %s,`maxScore` = %s,`runningTime` = %s,`memory` = %s,`comment` = %s WHERE `id` = %s")
-            data = (result, score, maxScore, runningTime, memory, comment, subID) #Don't forget to add subID
+            query = ("UPDATE `submission` SET `result` = %s,`score` = %s,`maxScore` = %s,`comment` = %s WHERE `id` = %s")
+            data = (result, score, maxScore, comment, subID) #Don't forget to add subID
             mycursor.execute(query, data)
             print(f"Finished Judge submission={subID}, problem={probID}, user={userID} --> {result}")
 
