@@ -18,9 +18,11 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['swal_success'] = "เข้าสู่ระบบสำเร็จ";
                 $_SESSION['swal_success_msg'] = "ยินดีต้อนรับ " . $row['name'] . "!";
-
-                $_properties = json_decode($row['properties'], true);
-                $_SESSION['admin'] = array_key_exists("admin", $_properties) ? $_properties["admin"] : false;
+                $_SESSION['admin'] = false;
+                if ($row['properties'] != null) {
+                    $_properties = json_decode($row['properties'], true);
+                    $_SESSION['admin'] = array_key_exists("admin", $_properties) ? $_properties["admin"] : false;
+                }
             }
         } else {
             $_SESSION['error'] = "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง";
