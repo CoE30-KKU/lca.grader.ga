@@ -29,7 +29,9 @@
     }
 
     function isAdmin($id, $conn) {
-        $_properties = json_decode(getUserdata($id, 'properties', $conn), true);
+        $_properties = getUserdata($id, 'properties', $conn);
+        if ($_properties == null) return false;
+        $_properties = json_decode($_properties, true);
         return array_key_exists("admin", $_properties) ? $_properties['admin'] : false;
     }
 
