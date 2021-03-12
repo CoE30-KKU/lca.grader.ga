@@ -7,7 +7,7 @@
     $dbpass = "8db!#yYvK]8Lw6F|37wz:UwU";
     $dbdatabase = "lca.grader.ga";
     $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbdatabase); 
-    mysqli_set_charset($conn, 'utf8');
+    mysqli_set_charset($conn, 'utf8mb4');
 
     $private_key = md5("THANK YOU OTOG.CF, OTOG.ORG, PROGRAMMING.IN.TH, KIYAGO, GAREDAMI");
 
