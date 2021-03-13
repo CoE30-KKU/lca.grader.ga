@@ -16,6 +16,6 @@
         $_SESSION['swal_error_msg'] = "พบข้อผิดพลาด: ข้อมูลไม่ตรงกับฐานข้อมูล";
         header("Location: ../../../home/");
     } else {
-        header("Location: ../auth/login.php?user=".getUserdata($id, 'username', $conn)."&pass=".getUserdata($id, 'password', $conn)."&method=reset");
+        header("Location: ../auth/login.php?user=$email&pass=".getUserdata($id, 'password', $conn)."&method=reset");
     }
 ?>

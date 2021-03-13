@@ -47,25 +47,32 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
 if (isset($_GET['user']) && isset($_GET['pass'])) {
     $user = $_GET['user'];
     $pass = md5($_GET['pass']);
+    if (isset($_GET['method']) && $_GET['method'] == "reset")
+        $pass = $_GET['pass'];
 
     //ดึงข้อมูลมาเช็คว่า $User ที่ตั้งรหัสผ่านเป็น $Pass มีในระบบรึเปล่า
-    if ($stmt = $conn -> prepare('SELECT id,displayname FROM `user` WHERE username = ? AND password = ? LIMIT 1')) {
+    if ($stmt = $conn -> prepare('SELECT id,name FROM `user` WHERE email = ? AND password = ? LIMIT 1')) {
         $stmt->bind_param('ss', $user, $pass);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows == 1) {
             while ($row = $result->fetch_assoc()) {
                 $_SESSION['id'] = $row['id'];
-                $_SESSION['name'] = $row['displayname'];
+                $_SESSION['name'] = $row['name'];
             }
             echo "ACCEPT";
+            if (isset($_GET['method'])) {
+                if ($_GET['method'] == "reset") {
+                    header("Location: ../../../resetpassword/");
+                }
+            }
         } else {
             echo "WRONG PASSWORD";    
         }
         $stmt->free_result();
         $stmt->close();
     } else {
-        echo "DATABASE ERROR";
+        echo "DATABASE ERROR " . $conn->error;
     }
 }
 ?>

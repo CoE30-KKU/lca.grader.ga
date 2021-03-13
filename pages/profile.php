@@ -82,7 +82,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text md-addon">รหัสผ่าน</span>
                                     </div>
-                                    <input type="text" class="form-control mr-sm-3" id="password" name="password"
+                                    <input type="password" class="form-control mr-sm-3" id="password" name="password"
                                         placeholder="พิมพ์รหัสผ่านเพื่อตั้งรหัสผ่านใหม่... (การเว้นว่างจะถือว่าใช้รหัสผ่านเดิม)"
                                         value="">
                                 </div>
