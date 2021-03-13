@@ -10,7 +10,7 @@ require_once '../../../vendor/PHPMailer/SMTP.php';
 // Form details
 $email_to = $_GET['email'];
 
-$fullname = "Grader.ga"; // required
+$fullname = "LCA.Grader.ga"; // required
 $email_from = "palapon.soontornpas@gmail.com"; // required
 $subject = "สวัสดี! " . $_GET['name']; // required
 $message = "คุณได้ทำการส่งคำร้องขอรีเซ็ตรหัสผ่านเพื่อเข้าใช้งานเว็บไซต์"; // required
@@ -41,7 +41,7 @@ try {
     $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
     //Recipients
-    $mail->setFrom($email_from, 'Computer_MVSK');
+    $mail->setFrom($email_from, 'LCA.Grader.ga');
     $mail->addAddress($email_to, $fullname);     // Add the recipient
 
     //Content

@@ -17,7 +17,6 @@
         }
         $(this).trigger("change");
     });
-    $('input[type=email]').val('test').siblings('label').addClass('active');
     
     // Tooltips Initialization
     $(document).ready(function () {

@@ -11,7 +11,7 @@
         $id = mysqli_fetch_array($q, MYSQLI_ASSOC)['id'];
         $pass = getUserdata($id, 'password', $conn);
         $email = getUserdata($id, 'email', $conn);
-        $name = getUserdata($id, 'displayname', $conn);
+        $name = getUserdata($id, 'name', $conn);
 
         if (mysqli_num_rows($q) == 0) {
             $_SESSION['error'] = "ไม่พบอีเมลนี้ในฐานข้อมูล";
