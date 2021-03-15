@@ -51,14 +51,20 @@ if (isset($_GET['user']) && isset($_GET['pass'])) {
         $pass = $_GET['pass'];
 
     //ดึงข้อมูลมาเช็คว่า $User ที่ตั้งรหัสผ่านเป็น $Pass มีในระบบรึเปล่า
-    if ($stmt = $conn -> prepare('SELECT id,name FROM `user` WHERE email = ? AND password = ? LIMIT 1')) {
+    if ($stmt = $conn -> prepare('SELECT * FROM `user` WHERE email = ? AND password = ? LIMIT 1')) {
         $stmt->bind_param('ss', $user, $pass);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows == 1) {
             while ($row = $result->fetch_assoc()) {
                 $_SESSION['id'] = $row['id'];
+                $_SESSION['std_id'] = $row['std_id'];
                 $_SESSION['name'] = $row['name'];
+                $_SESSION['admin'] = false;
+                if ($row['properties'] != null) {
+                    $_properties = json_decode($row['properties'], true);
+                    $_SESSION['admin'] = array_key_exists("admin", $_properties) ? $_properties["admin"] : false;
+                }
             }
             echo "ACCEPT";
             if (isset($_GET['method'])) {

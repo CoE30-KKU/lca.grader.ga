@@ -1,6 +1,6 @@
 <div class="container mb-3" style="padding-top: 88px;" id="container">
     <h1 class="display-4 font-weight-bold text-center text-coekku">Problem</h1>
-    <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { ?><a href="../problem/create" class="btn btn-coekku btn-sm">+ Add Problem</a><?php } ?>
+    <?php if (isLogin()) { ?><a href="../problem/create" class="btn btn-coekku btn-sm">+ Add Problem</a><?php } ?>
     <div class="table-responsive">
         <table class="table table-hover w-100 d-block d-md-table" id="problemTable">
             <thead>
