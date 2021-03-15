@@ -11,7 +11,7 @@ require_once '../../../vendor/PHPMailer/SMTP.php';
 $email_to = $_GET['email'];
 
 $fullname = "LCA.Grader.ga"; // required
-$email_from = "palapon.soontornpas@gmail.com"; // required
+$email_from = "p0ndja.dev@gmail.com"; // required
 $subject = "สวัสดี! " . $_GET['name']; // required
 $message = "คุณได้ทำการส่งคำร้องขอรีเซ็ตรหัสผ่านเพื่อเข้าใช้งานเว็บไซต์"; // required
 
@@ -35,8 +35,8 @@ try {
     $mail->isHTML(true);
     $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = 'palapon.soontornpas@gmail.com';                     // SMTP username
-    $mail->Password   = '11032545';                               // SMTP password
+    $mail->Username   = 'p0ndja.dev@gmail.com';                     // SMTP username
+    $mail->Password   = 'fbP>ZM4kZVPM';                               // SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
     $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
