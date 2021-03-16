@@ -120,7 +120,7 @@
                 <div class="card-body">
                     <form method="post" action="../pages/problem_user_submit.php" enctype="multipart/form-data">
                         <h5 class="font-weight-bold text-coekku">Submission</h5>
-                        <textarea class="form-control" id="answer" name="answer" rows="8" style="white-space: pre;"
+                        <textarea class="form-control" id="answer" name="answer" class="answer" rows="8" style="white-space: pre;"
                             required></textarea>
                         <button type="submit" id="submitbtn" value="prob" name="submit"
                             class="btn btn-block btn-coekku btn-md" disabled>Submit</button>

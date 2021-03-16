@@ -10,6 +10,10 @@
         text-rendering: optimizelegibility;
     }
 
+    textarea {  
+        font-family:"Fira Code", "Consolas", monospace !important;  
+    }
+
     .rainbow {
         animation: rainbowColor 6s linear 0s infinite;
     }
