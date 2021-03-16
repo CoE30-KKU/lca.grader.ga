@@ -104,7 +104,7 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="font-weight-bold text-coekku">Answer</small>&nbsp;
-                            <a href="#drive_url" target="_blank"><i class="fas fa-question-circle"></i></a></h5>
+                            <a href="https://api.grader.ga/doc/How%20to%20use%20LCA%20Graderga.pdf" target="_blank"><i class="fas fa-question-circle"></i></a></h5>
                             <textarea class="form-control" id="answer" name="answer" rows="8" style="white-space: pre;" required><?php echo $answer; ?></textarea>
                             <input type="hidden" name="rating" id="rating" value="<?php echo $probRate; ?>"/>
                             <input type="hidden" name="hide" id="hide" value="<?php echo $hide; ?>"/>
