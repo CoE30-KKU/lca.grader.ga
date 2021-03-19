@@ -12,7 +12,7 @@
                     <a id="donateSubmit" class="btn btn-coekku">ส่งเอกสารการโอนเงินโดเนท</a>
                     <script>
                         $("#donateSubmit").on('click', function() {
-                            window.open('./submit','popUpWindow','height=200,width=500,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+                            window.open('https://grader.ga/donation/submit','popUpWindow','height=200,width=500,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
                         });
                     </script>
                 </p>
@@ -30,7 +30,7 @@
                         </thead>
                         <tbody class="text-nowrap">
                             <?php
-                                $json = json_decode(file_get_contents("https://api.11th.studio/p0ndja/donation_grader"), true);
+                                $json = json_decode(file_get_contents("http://api.11th.studio/p0ndja/donation_grader"), true);
                                 $amount = 0;
                                 foreach ($json as $j) {
                                     $time = strtotime($j['timestamp']); $month = date('m', $time);
