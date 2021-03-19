@@ -23,6 +23,7 @@ RewriteRule ^editorial/category=(.*)$ pages/page_loader.php?target=editorial.php
 RewriteRule ^editorial/create$ pages/page_loader.php?target=editorial_edit.php [L]
 RewriteRule ^editorial/edit-([0-9]+)$ pages/page_loader.php?target=editorial_edit.php&id=$1 [L]
 RewriteRule ^donation/$ pages/page_loader.php?target=donation.php [L]
+RewriteRule ^donation/submit$ pages/donation_submit.php [L]
 RewriteRule ^forgetpassword/$ pages/page_loader.php?target=password_forget.php [L]
 RewriteRule ^resetpassword/$ pages/page_loader.php?target=password_reset.php [L]
 
