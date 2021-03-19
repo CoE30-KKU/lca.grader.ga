@@ -276,7 +276,7 @@
     }
 
     function generateRandom($length = 16) {
-        $characters = md5(time());
+        $characters = md5((string) time());
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, strlen($characters) - 1)];
