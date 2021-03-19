@@ -22,6 +22,7 @@ if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {
                 if ($row['properties'] != null) {
                     $_properties = json_decode($row['properties'], true);
                     $_SESSION['admin'] = array_key_exists("admin", $_properties) ? $_properties["admin"] : false;
+                    $_SESSION['name'] = array_key_exists("rainbow", $_properties) ? "<text class='rainbow'>".$_SESSION['name']."</text>" : $_SESSION['name'];
                 }
             }
         } else {
