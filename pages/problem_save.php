@@ -30,7 +30,7 @@
                     die("Can't mkdir");
 
             if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
-                $file = glob($locate . $codename . "*.pdf");
+                $file = glob($locate . $probCodename . "*.pdf");
                 foreach($file as $f) unlink($f); //Remove all [testcase].[pdf] in problem directory before upload new
                 $name_file = $probCodename . generateRandom(5) . ".pdf";
                 $tmp_name = $_FILES['pdfPreview']['tmp_name'];
