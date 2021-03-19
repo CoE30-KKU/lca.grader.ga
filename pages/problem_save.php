@@ -2,6 +2,15 @@
     require_once '../static/functions/connect.php';
     require_once '../static/functions/function.php';
 
+    function generateRandom($length = 5) {
+        $characters = md5(time());
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $randomString;
+    }
+
     $id = "";
     if (isLogin()) {
         if (isset($_POST['problem'])) {
@@ -30,7 +39,9 @@
                     die("Can't mkdir");
 
             if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
-                $name_file = $probCodename . ".pdf";
+                $file = glob($locate . $codename . "*.pdf");
+                foreach($file as $f) unlink($f); //Remove all [testcase].[pdf] in problem directory before upload new
+                $name_file = $probCodename . generateRandom(5) . ".pdf";
                 $tmp_name = $_FILES['pdfPreview']['tmp_name'];
                 if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
             }
