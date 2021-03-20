@@ -75,7 +75,7 @@
             $('.dataTables_length').addClass('bs-select');
             $("#onlyme").change(function() {
                 if ($(this).is(':checked')) {
-                    submission_table.search("<?php if (isset($_SESSION['std_id'])) echo $_SESSION['std_id']; ?>").draw();
+                    submission_table.search("<?php if (isset($_SESSION['id'])) echo getUserdata($_SESSION['id'],'name', $conn); else echo ""; ?>").draw();
                 } else {
                     submission_table.search("").draw();
                 }
