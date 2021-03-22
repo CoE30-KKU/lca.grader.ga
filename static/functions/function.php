@@ -134,7 +134,7 @@
         if (!$arr) return " "; //Case not any submission yet.
         $subID = $arr["subID"];
         if ($arr['result'] == 'W') return "<text data-wait=true data-sub-id='$subID'> รอผลตรวจ... " . "(" . ($arr['score']/$arr['maxScore'])*$arr['probScore'] . ")</text>";
-        else return $arr['result'] . " (" . ($arr['score']/$arr['maxScore'])*$arr['probScore'] . ")";
+        else return $arr['result'] . " (" . sprintf("%.2f", ($arr['score']/$arr['maxScore'])*$arr['probScore']) . ")";
     }
 
     function lastSubmission($uID, $pID, $conn) {

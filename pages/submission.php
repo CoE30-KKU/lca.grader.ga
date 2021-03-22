@@ -46,8 +46,8 @@
                                 $subID = $row['id'];
                                 $subUser = usergen($row['userDisplayname'], $row['userProperties']);
                                 $subProb = probgen($row['probName'], $row['probCodename']);
-                                $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
-                                $subScore = ($row['score']/$row['maxScore'])*$row['probScore'];
+                                $subResult = $row['result'] != 'W' ? $row['result'] : 'รอผลตรวจ...';
+                                $subScore = sprintf("%.2f", ($row['score']/$row['maxScore'])*$row['probScore']);
                                 //$subRuntime = $row['runningtime']/1000;
                                 $subUploadtime = $row['uploadtime']; 
                                 $i++; ?>
