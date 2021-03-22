@@ -25,7 +25,7 @@
             <th>P102 (28)</th>
         </tr>
         <?php 
-        for($o = 1; $o <= 5; $o++) {
+        for($o = 1; $o <= 91; $o++) {
             echo "<tr>";
             echo "<td>" . user($o, $conn) . "</td>";
             echo "<td>" . lastResult($o,29,$conn) . "</td>";
