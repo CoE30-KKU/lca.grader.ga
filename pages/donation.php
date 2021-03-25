@@ -44,12 +44,12 @@
                         </tbody>
                     </table>
                 </div>
-                <?php $val = ($amount / 150)*100;
-                if ($val > 100) $val = 100; ?>
+                <?php   $val = ($amount / 150)*100;
+                        $valMsg = $val > 100 ? "<text class='font-weight-bold rainbow'>".number_format((float) $val, 2, '.', '')."%</text>" : number_format((float) $val, 2, '.', '') . "%"; ?>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-animated bg-coekku" role="progressbar" style="width: <?php echo $val;?>%" aria-valuenow="<?php echo $val;?>" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <small><?php echo $amount; ?>/150 THB (<?php echo number_format((float) $val, 2, '.', ''); ?>%)</small>
+                <small><?php echo $amount; ?>/150 THB (<?php echo $valMsg; ?>)</small>
                 <?php
                     $f = file_get_contents("http://api.11th.studio/p0ndja/invoice.txt"); 
                     $f = explode("\n", $f);
