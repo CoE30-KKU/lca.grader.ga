@@ -21,7 +21,7 @@
                 <div class="table-responsive">
                 <h4 class="font-weight-bold text-center text-coekku">Donator <br>เดือน <?php echo date("F Y"); ?></h4>
                 <p class="text-center text-muted"><small>ทุกคนที่บริจาคจะได้รับ <text class="rainbow font-weight-bold">ชื่อสีรุ้ง</text> (ถาวร)</small></p>
-                    <table class="table table-hover w-100" id="submissionTable">
+                    <table class="table table-sm table-hover w-100" id="submissionTable">
                         <thead>
                             <tr class="text-nowrap me">
                                 <th scope="col" class="font-weight-bold text-coekku">User</th>
