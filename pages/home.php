@@ -16,7 +16,7 @@
                             <div class="bounceInLeft delay-1s animated">
                             <h5 class="rainbow mt-3">โจทย์มาใหม่!!</h5>
                             <div class="table-responsive">
-                                <table class="table table-hover table-sm d-block d-md-table" id="problemTable">
+                                <table class="table table-hover table-sm d-table" id="problemTable">
                                     <thead>
                                         <tr class="text-nowrap">
                                             <th scope="col" class="font-weight-bold text-coekku text-right">ID</th>

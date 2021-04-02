@@ -17,27 +17,47 @@
     .rainbow {
         animation: rainbowColor 6s linear 0s infinite;
     }
+    
+    .rainbowFASTO {
+        animation: rainbowColor 0.2s linear 0s infinite;
+    }
 
     @keyframes rainbowColor {
         from {
-            color: #6666ff;
+            color: hsl(0, 100%, 50%);
+        }   
+
+        12.5% {
+            color: hsl(30, 100%, 50%);
         }
 
-        10% {
-            color: #0099ff;
+        25% {
+            color: hsl(60, 100%, 50%);
+        }
+
+        37.5% {
+            color: hsl(120, 100%, 50%);
         }
 
         50% {
-            color: #00ff00;
+            color: hsl(180, 100%, 50%);
+        }
+
+        67.5% {
+            color: hsl(240, 100%, 50%);
         }
 
         75% {
-            color: #ff3399;
+            color: hsl(280, 100%, 50%);
+        }
+        87.5% {
+            color: hsl(320, 100%, 50%);
         }
 
         100% {
-            color: #6666ff;
+            color: hsl(0, 100%, 50%);
         }
+        
     }
 
 
