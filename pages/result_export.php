@@ -32,17 +32,22 @@ xmlns="http://www.w3.org/TR/REC-html40">
             <th>A04Q1 (#41)</th>
             <th>A04Q2 (#42)</th>
             <th>A04Q3 (#43)</th>
+            <th>Total</th>
         </tr>
         <?php 
         for($o = 1; $o <= 91; $o++) {
             $user = explode("(", user($o, $conn));
+            $score_41 = (int) lastResult2($o,41,$conn);
+            $score_42 = (int) lastResult2($o,42,$conn);
+            $score_43 = (int) lastResult2($o,43,$conn);
             echo "<tr>";
             echo "<td>" . $o . "</td>";
             echo "<td>" . str_replace(")", "", $user[1]) . "</td>";
             echo "<td>" . $user[0] . "</td>";
-            echo "<td>" . lastResult2($o,41,$conn) . "</td>";
-            echo "<td>" . lastResult2($o,42,$conn) . "</td>";
-            echo "<td>" . lastResult2($o,43,$conn) . "</td>";     
+            echo "<td>$score_41</td>";
+            echo "<td>$score_42</td>";
+            echo "<td>$score_43</td>";  
+            echo "<td>$total</td>"; 
             echo "</tr>";
         }
         ?>
