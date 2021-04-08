@@ -40,6 +40,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
             $score_41 = (int) lastResult2($o,41,$conn);
             $score_42 = (int) lastResult2($o,42,$conn);
             $score_43 = (int) lastResult2($o,43,$conn);
+            $total = $score_41 + $score_42 + $score_43;
             echo "<tr>";
             echo "<td>" . $o . "</td>";
             echo "<td>" . str_replace(")", "", $user[1]) . "</td>";
