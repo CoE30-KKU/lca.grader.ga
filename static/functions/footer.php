@@ -35,6 +35,7 @@
                 $(this).load('../pages/prob_result.php?id='+subID+"&time");
                 if ($(this).html().indexOf("รอผลตรวจ...") === -1) {
                     $(this).removeAttr("data-wait");
+                    //$(this).attr("data-order", "score");
                     console.log("Finished Juding " + subID + " -> " + $(this).html());  
                 } else {
                     console.log("Waiting for Juding " + subID);  
