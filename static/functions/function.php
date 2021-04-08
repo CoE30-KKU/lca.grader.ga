@@ -129,6 +129,12 @@
         if ($arr['score'] != 0 && $arr['score'] < $arr['maxScore']) return -1;
     }
 
+    function latestSubmissionCode($uID, $pID, $conn) {
+        $arr = lastSubmission($uID,$pID,$conn);
+        if (!$arr) return null;
+        return file_exists($arr["script"]) ? fread(fopen($arr["script"],"r"), filesize($arr["script"])) : null;
+    }
+
     function lastResult($uID, $pID, $conn) {
         $arr = lastSubmission($uID,$pID,$conn);
         if (!$arr) return " "; //Case not any submission yet.
@@ -147,7 +153,7 @@
 
     function lastSubmission($uID, $pID, $conn) {
         if (!isValidUserID($uID, $conn) || !isValidProbID($pID, $conn)) return 0;
-        if ($stmt = $conn -> prepare("SELECT `submission`.`id` AS subID, `submission`.`result` AS result,`submission`.`score` AS score,`submission`.`maxScore` AS maxScore,`problem`.`score` AS probScore FROM `submission` INNER JOIN `problem` ON `submission`.`problem` = `problem`.`id` WHERE problem = ? AND user = ? ORDER BY `submission`.`id` DESC limit 1")) {
+        if ($stmt = $conn -> prepare("SELECT `submission`.`script` as subScript, `submission`.`uploadtime` as `upload`, `submission`.`id` AS subID, `submission`.`result` AS result,`submission`.`score` AS score,`submission`.`maxScore` AS maxScore,`problem`.`score` AS probScore FROM `submission` INNER JOIN `problem` ON `submission`.`problem` = `problem`.`id` WHERE problem = ? AND user = ? ORDER BY `submission`.`id` DESC limit 1")) {
             $stmt->bind_param('ii', $pID, $uID);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -159,6 +165,8 @@
                     $arr["maxScore"] = $row['maxScore'];
                     $arr["result"] = $row['result'];
                     $arr["probScore"] = $row['probScore'];
+                    $arr["upload"] = $row['upload'];
+                    $arr["script"] = $row['subScript'];
                     return $arr;
                 }
                 $stmt->free_result();
