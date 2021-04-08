@@ -46,6 +46,15 @@
                 fclose($file);
             }
 
+            $probNumtol = (int) $_POST['numtol'];
+            $file = fopen("../file/judge/prob/$id/numtol.txt","w");
+            if (!fwrite($file,$probNumtol)) {
+                $_SESSION['swal_error'] = "พบข้อผิดพลาด!";
+                $_SESSION['swal_error_msg'] = "ไม่สามารถเขียน/อ่านไฟล์ได้";
+            } else {
+                fclose($file);
+            }
+
             //INSERT INTO table (id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE name="A", age=19
             print_r(array($probName, $probCodename, $probScore, $probMemory, $probTime, $properties, $probAuthor));
             if ($isCreate) {

@@ -25,7 +25,11 @@
         } else {
             header("Location: ../problem/");
         }
-        $answer = fread(fopen("../file/judge/prob/$id/answer.txt","r"), filesize("../file/judge/prob/$id/answer.txt"));
+        $target_problem_path = "../file/judge/prob/$id/"; $answer = ""; $num_tol = 0.001;
+        if (file_exists($target_problem_path."answer.txt"))
+            $answer = fread(fopen($target_problem_path."answer.txt","r"), filesize($target_problem_path."answer.txt"));
+        if (file_exists($target_problem_path."numtol.txt"))
+            $num_tol = (int) fread(fopen($target_problem_path."numtol.txt","r"), filesize($target_problem_path."numtol.txt"));
 
     }
     $probDoc = "static/elements/demo.pdf";
@@ -98,6 +102,15 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="TXT" id="Plain Text" disabled checked name="lang[]">
                                 <label class="form-check-label" for="Plain Text">LCA Custom Template</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="font-weight-bold text-coekku">Config</h5>
+                            <div class="md-form">
+                                <input type="number" min="0" step="0.001" id="numtol" name="numtol" value="0.001" required class="form-control">
+                                <label class="form-label" for="numtol">Tolerance Number</label>
                             </div>
                         </div>
                     </div>
