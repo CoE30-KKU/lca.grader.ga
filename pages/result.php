@@ -10,7 +10,7 @@
             <th>Total</th>
         </tr>
         <?php 
-        for($o = 30; $o <= 40; $o++) {
+        for($o = 1; $o <= 91; $o++) {
             $score_41 = (int) lastResult2($o,41,$conn);
             $score_42 = (int) lastResult2($o,42,$conn);
             $score_43 = (int) lastResult2($o,43,$conn);
