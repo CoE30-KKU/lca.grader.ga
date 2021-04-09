@@ -9,7 +9,7 @@
     </div>
     <?php } ?>
     <div class="table-responsive">
-        <table class="table table-hover w-100 d-block d-md-table" id="submissionTable">
+        <table class="table table-hover table-striped w-100 d-block d-md-table" id="submissionTable">
             <thead>
                 <tr class="text-nowrap me">
                     <th scope="col" class="font-weight-bold text-coekku">ID</th>
