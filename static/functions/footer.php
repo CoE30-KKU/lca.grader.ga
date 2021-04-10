@@ -24,6 +24,7 @@
         $('[data-toggle="tooltip"]').tooltip();
         $('.btn-floating').unbind('click');
         $('.fixed-action-btn').unbind('click');
+        pdfNiceLook();
         attachFooter();
         checkResult();
     });
@@ -56,6 +57,17 @@
 
     // start observing a DOM node
     resizeObserver.observe(document.body);
+    
+    if (document.getElementById("problemDetails"))
+        resizeObserver.observe(document.getElementById("problemDetails"));
+
+    function pdfNiceLook() {
+        //console.log($("#problemDetails").height());
+        var targetHeight = 650;
+        if ($("#problemDetails").height() > 650)
+            targetHeight = $("#problemDetails").height();
+        $("#pdfViewer").height(targetHeight-30);
+    }
 
     function attachFooter() {
         console.log($(document.body).height() + " | " + $(window).height());
@@ -64,6 +76,7 @@
         } else {
             $('#footer').removeAttr('style');
         }
+        pdfNiceLook();
     }
 
     $('.dropdown-menu').find('form').click(function (e) {

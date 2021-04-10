@@ -96,35 +96,37 @@
                         width="100%" height="600" class="z-depth-1" id="pdfViewer" name="pdfViewer"></iframe>
                 </div>
                 <div class="col-12 col-md-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="font-weight-bold text-coekku">Language</h5>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="TXT" id="Plain Text" disabled checked name="lang[]">
-                                <label class="form-check-label" for="Plain Text">LCA Custom Template</label>
+                    <div id="problemDetails">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="font-weight-bold text-coekku">Language</h5>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="TXT" id="Plain Text" disabled checked name="lang[]">
+                                    <label class="form-check-label" for="Plain Text">LCA Custom Template</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="font-weight-bold text-coekku">Config</h5>
-                            <div class="md-form">
-                                <input type="number" min="0" step="0.001" id="numtol" name="numtol" value="0.001" required class="form-control">
-                                <label class="form-label" for="numtol">Tolerance Number</label>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="font-weight-bold text-coekku">Config</h5>
+                                <div class="md-form">
+                                    <input type="number" min="0" step="0.001" id="numtol" name="numtol" value="0.001" required class="form-control">
+                                    <label class="form-label" for="numtol">Tolerance Number</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="font-weight-bold text-coekku">Answer</small>&nbsp;
-                            <a href="https://api.grader.ga/doc/How%20to%20use%20LCA%20Graderga.pdf" target="_blank"><i class="fas fa-question-circle"></i></a></h5>
-                            <textarea class="form-control" id="answer" name="answer" rows="8" style="white-space: pre;" required><?php echo $answer; ?></textarea>
-                            <input type="hidden" name="rating" id="rating" value="<?php echo $probRate; ?>"/>
-                            <input type="hidden" name="hide" id="hide" value="<?php echo $hide; ?>"/>
-                            <input type="hidden" name="last_hide_updated" id="last_hide_updated" value="<?php echo $last_hide_updated; ?>"/>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="font-weight-bold text-coekku">Answer</small>&nbsp;
+                                <a href="https://api.grader.ga/doc/How%20to%20use%20LCA%20Graderga.pdf" target="_blank"><i class="fas fa-question-circle"></i></a></h5>
+                                <textarea class="form-control" id="answer" name="answer" rows="8" style="white-space: pre;" required><?php echo $answer; ?></textarea>
+                                <input type="hidden" name="rating" id="rating" value="<?php echo $probRate; ?>"/>
+                                <input type="hidden" name="hide" id="hide" value="<?php echo $hide; ?>"/>
+                                <input type="hidden" name="last_hide_updated" id="last_hide_updated" value="<?php echo $last_hide_updated; ?>"/>
+                            </div>
                         </div>
+                        <button class="btn btn-coekku btn-block" type="submit" name="problem" value="<?php if (isset($_GET['id'])) echo "edit"; else echo "create"; ?>">Save</button>
                     </div>
-                    <button class="btn btn-coekku btn-block" type="submit" name="problem" value="<?php if (isset($_GET['id'])) echo "edit"; else echo "create"; ?>">Save</button>
                 </div>
             </div>
         </form>
