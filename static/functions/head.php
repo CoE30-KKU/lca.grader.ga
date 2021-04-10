@@ -78,7 +78,7 @@
     <script src="https://cdn.p0nd.ga/dropzone/dropzone.js"></script>
     
     <!-- Fontawesome -->
-    <link href="https://cdn.p0nd.ga/fontawesome/css/all.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/7454809de8.js" crossorigin="anonymous"></script>
 
     <script src="https://tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/highlight.pack.js"></script>
     <link href="https://tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/styles/monokai_sublime.css" rel="stylesheet" type="text/css">
