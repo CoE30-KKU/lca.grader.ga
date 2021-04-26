@@ -29,7 +29,7 @@
         if (file_exists($target_problem_path."answer.txt"))
             $answer = fread(fopen($target_problem_path."answer.txt","r"), filesize($target_problem_path."answer.txt"));
         if (file_exists($target_problem_path."numtol.txt"))
-            $num_tol = (int) fread(fopen($target_problem_path."numtol.txt","r"), filesize($target_problem_path."numtol.txt"));
+            $num_tol = (float) fread(fopen($target_problem_path."numtol.txt","r"), filesize($target_problem_path."numtol.txt"));
 
     }
     $probDoc = "static/elements/demo.pdf";

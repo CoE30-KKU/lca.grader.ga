@@ -46,7 +46,7 @@
                 fclose($file);
             }
 
-            $probNumtol = (int) $_POST['numtol'];
+            $probNumtol = (float) $_POST['numtol'];
             $file = fopen("../file/judge/prob/$id/numtol.txt","w");
             if (!fwrite($file,$probNumtol)) {
                 $_SESSION['swal_error'] = "พบข้อผิดพลาด!";
