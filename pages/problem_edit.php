@@ -110,7 +110,7 @@
                             <div class="card-body">
                                 <h5 class="font-weight-bold text-coekku">Config</h5>
                                 <div class="md-form">
-                                    <input type="number" min="0" step="0.001" id="numtol" name="numtol" value="0.001" required class="form-control">
+                                    <input type="number" min="0" step="0.001" id="numtol" name="numtol" value="<?php echo $num_tol; ?>" required class="form-control">
                                     <label class="form-label" for="numtol">Tolerance Number</label>
                                 </div>
                             </div>
