@@ -38,6 +38,34 @@
         });
 </script>
 
+<!-- Announcement Modal -->
+<div class="modal animated jackInTheBox fadeOut" id="announcementPopup" name="announcementPopup" tabindex="-1" role="dialog"
+    aria-labelledby="announcementTitle" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-coekku modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="annoucementTitle">ข่าวประชาสัมพันธ์</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="https://s3.p0nd.ga/54654.jfif"
+                    class="img-fluid w-100 d-flex justify-content-center mb-3 z-depth-2">
+                <div class="modal-text">
+                    <p>ทางผู้พัฒนาขอความร่วมมือจากผู้เข้าชมเว็บไซต์ทุก ๆ ท่าน ร่วมตอบแบบสำรวจความพึงพอใจในการใช้งานเว็บไซต์ <a href="https://grader.ga/">grader.ga</a> และ/หรือ <a href="https://lca.grader.ga/">lca.grader.ga</a><br><p class="text-right">ขอบคุณครับ<br>PondJa<sup>TH</sup></p>
+                    </p>
+                    <div class="text-center"><a href="https://p0nd.ga/graderga_survey" target="_blank" class="btn btn-coekku"><h1 class="animated infinite pulse">ตอบแบบสอบถาม</h1></a></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-md btn-warning" data-dismiss="modal">ปิดหน้าต่าง</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Announcement Modal -->
+
 <!-- Popup Modal -->
 <div class="modal animated fade" id="modalPopup" name="modalPopup" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-notify modal-coekku modal-lg" role="document">

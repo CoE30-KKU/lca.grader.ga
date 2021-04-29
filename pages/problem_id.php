@@ -121,6 +121,20 @@
                     <div class="card-body">
                         <form method="post" action="../pages/problem_user_submit.php" enctype="multipart/form-data">
                             <h5 class="font-weight-bold text-coekku">Submission</h5>
+                            <?php
+                            $count = 0;
+                            if ($stmt = $conn -> prepare("SELECT count(`submission`.`id`) as c FROM `submission` WHERE user = ? and problem = ? ORDER BY `id`")) {
+                                $user = $_SESSION['id'];
+                                $stmt->bind_param('ii', $user, $id);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        $count = (int) $row['c'];
+                                    }
+                                }
+                            }
+                            ?>
                             <textarea class="form-control" id="answer" name="answer" class="answer" rows="8" style="white-space: pre;" required><?php echo latestSubmissionCode($_SESSION['id'], $id, $conn);?></textarea>
                             <button type="submit" id="submitbtn" value="prob" name="submit"
                                 class="btn btn-block btn-coekku btn-md" disabled>Submit</button>
