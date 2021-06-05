@@ -22,6 +22,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="../donation/">Donation</a>
             </li>
+            <?php if (((int) date("m")) == 6) { ?>
+            <li class="nav-item">
+                <a class="nav-link" href="https://twitter.com/hashtag/pride"><text class="rainbow-gradient-text-moving">#Pride</text> 🏳‍🌈</a>
+            </li>
+            <?php } ?>
         </ul>
         <div class="my-2 my-lg-0">
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
