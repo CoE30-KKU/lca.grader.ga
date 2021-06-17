@@ -81,7 +81,7 @@
                                 processData: false,
                                 success: function(response){
                                     if(response != 0){
-                                        $("#pdfViewer").attr("src",response);
+                                        $("#pdfViewer").attr("src","../vendor/pdf.js/web/viewer.html?file=../../" + response);
                                         $("#probDoc").val(response); 
                                     }else{
                                         alert('file not uploaded');
