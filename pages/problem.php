@@ -15,16 +15,15 @@
             <tbody class="text-nowrap">
                 <?php
                 $admin = isAdmin($_SESSION['id'], $conn);
-                $userID = isLogin() ? $_SESSION['user']->getID() : 0;
-                if ($stmt = $conn -> prepare("SELECT `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, `problem`.`author` as probAuthor, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = ? AND `submission`.`problem` = `problem`.`id` LIMIT 1) as subResult FROM `problem` ORDER BY `problem`.`id`")) {
+                $userID = isLogin() ? $_SESSION['id'] : 0;
+                if ($stmt = $conn -> prepare("SELECT `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, `problem`.`author` as probAuthor, `user`.`name` as username, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = ? AND `submission`.`problem` = `problem`.`id` LIMIT 1) as subResult FROM `problem` INNER JOIN `user` WHERE `user`.`std_id` = `problem`.`author` ORDER BY `problem`.`id`")) {
                     $stmt->bind_param('i', $userID);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            $id = $row['probID']; $name = $row['probName']; $codename = $row['probCode']; $author = $row['probAuthor']; $user = $row['username'];
-                            
-                            $prop = json_decode($row['properties'],true);
+                            $id = $row['probID']; $name = $row['probName']; $codename = $row['probCode']; $author = $row['probAuthor']; $user = $row['username'];                            
+                            $prop = json_decode($row['probProp'],true);
                             $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
                             $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
 
