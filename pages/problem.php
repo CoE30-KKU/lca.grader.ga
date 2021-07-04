@@ -14,27 +14,34 @@
             </thead>
             <tbody class="text-nowrap">
                 <?php
-                $html = "";
-                if ($stmt = $conn -> prepare("SELECT problem.id,problem.codename,problem.name as name,problem.score,problem.author,problem.properties,user.name as username FROM problem INNER JOIN user WHERE user.std_id = problem.author ORDER BY problem.id")) {
-                    //$stmt->bind_param('ii', $page, $limit);
+                $admin = isAdmin($_SESSION['id'], $conn);
+                $userID = isLogin() ? $_SESSION['user']->getID() : 0;
+                if ($stmt = $conn -> prepare("SELECT `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, `problem`.`author` as probAuthor, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = ? AND `submission`.`problem` = `problem`.`id` LIMIT 1) as subResult FROM `problem` ORDER BY `problem`.`id`")) {
+                    $stmt->bind_param('i', $userID);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            $id = $row['id']; $name = $row['name']; $codename = $row['codename']; $author = $row['author']; $user = $row['username'];
+                            $id = $row['probID']; $name = $row['probName']; $codename = $row['probCode']; $author = $row['probAuthor']; $user = $row['username'];
                             
                             $prop = json_decode($row['properties'],true);
                             $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
                             $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
 
-                            $hideMessage = "";
-                            if ($hide) $hideMessage = "<span class='badge badge-danger'>ซ่อน</span>";
+                            $hideMessage = ($hide) ? "<span class='badge badge-danger'>ซ่อน</span>" : "";
 
-                            if (!$hide || (isLogin() && isAdmin($_SESSION['id'], $conn))) {
+                            $lastResult = $row['subResult'];
+                            $color;
+                            if (empty($lastResult)) $color = "";
+                            else if (str_contains($lastResult, "-") || str_contains($lastResult, "X") || str_contains($lastResult, "T"))
+                                $color = "yellow lighten-4";
+                            else $color = "green accent-1";
+                            
+                            if (!$hide || (isLogin() && $admin)) {
                                 $lastResult = isLogin() ? lastResult($_SESSION['id'], $id, $conn) : "";
-                                $html .= "<tr onclick='window.open(\"../problem/$id\")'>
-                                    <th class='text-right' scope='row'><a href=\"../problem/$id\" target=\"_blank\">$id</a></th>
-                                    <td><a href=\"../problem/$id\" target=\"_blank\">$name <span class='badge badge-coekku'>$codename</span> $hideMessage</a></td>
+                                echo "<tr style='cursor: pointer;' onmousedown='window.open(\"../problem/$id\")'>
+                                    <th class='text-right' scope='row'>$id</th>
+                                    <td>$name <span class='badge badge-coekku'>$codename</span> $hideMessage</td>
                                     <td>$user <span class='badge badge-coekku'>$author</span></td>
                                     <td data-order='".$rate."'>".rating($rate)."</td>
                                     <td><code>$lastResult</code></td>
@@ -44,7 +51,6 @@
                         $stmt->free_result();
                         $stmt->close();  
                     }
-                    echo $html;
                 }
                 ?>
             </tbody>
@@ -53,7 +59,7 @@
     <script>
         $(document).ready(function () {
             $('#problemTable').DataTable({
-                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "ทั้งหมด"] ],
+                "lengthMenu": [ [15, 50, 100, -1], [15, 50, 100, "All"] ],
                 'columnDefs': [ {
                     'targets': [1,3], // column index (start from 0)
                     'orderable': false, // set orderable false for selected columns

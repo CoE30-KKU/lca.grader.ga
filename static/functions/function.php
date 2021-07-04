@@ -202,7 +202,7 @@
     }
 
     function getProfileIMG($conn) {
-        if (!isLogin()) return "../static/elements/user.png";
+        if (!isLogin()) return "../static/elements/user.svg";
         $uid = $_SESSION['id'];
         if ($stmt = $conn -> prepare("SELECT `profile` FROM `user` WHERE id = ?")) {
             $stmt->bind_param('i', $uid);
@@ -210,7 +210,7 @@
             $result = $stmt->get_result();
             if ($result->num_rows == 1) {
                 while ($row = $result->fetch_assoc()) {
-                    return (!empty($row['profile']) ? $row['profile'] : "../static/elements/user.png");
+                    return (!empty($row['profile']) ? $row['profile'] : "../static/elements/user.svg");
                 }
             }
         }

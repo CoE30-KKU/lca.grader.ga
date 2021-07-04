@@ -15,7 +15,7 @@
         $result = $stmt->get_result();
         if ($result->num_rows == 1) {
             while ($row = $result->fetch_assoc()) {
-                $pic = !empty($row['profile']) ? $row['profile'] : "../static/elements/user.png";
+                $pic = !empty($row['profile']) ? $row['profile'] : "../static/elements/user.svg";
             }
         } else {
             header("Location: ../home/");
