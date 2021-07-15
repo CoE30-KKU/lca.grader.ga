@@ -16,7 +16,7 @@
                 "rating" => (int) $_POST['rating']
             ));
             
-            $id = $isCreate ? latestIncrement($dbdatabase, 'problem') : $_GET['id'];
+            $id = $isCreate ? latestIncrement('lca.grader.ga', 'problem') : $_GET['id'];
 
             if (!$isCreate && !isOwner($id)) {
                 $_SESSION['swal_error'] = "ACCESS DENIED";
