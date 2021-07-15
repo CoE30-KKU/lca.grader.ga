@@ -11,7 +11,7 @@
 
         //Check directory
         if (!file_exists("../file/judge/upload/$userID/"))
-            mkdir("../file/judge/upload/$userID/");
+            make_directory("../file/judge/upload/$userID/");
         
         if (!empty($answer)) {
             $userCodeLocate = "../file/judge/upload/$userID/$probCodename-$fileName.txt";
