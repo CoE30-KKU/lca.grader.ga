@@ -61,7 +61,8 @@
                 'columnDefs': [ {
                     'targets': [1,3], // column index (start from 0)
                     'orderable': false, // set orderable false for selected columns
-                }]
+                }],
+                "order": [[ 0, "desc" ]]
             });
             $('.dataTables_length').addClass('bs-select');
         });
