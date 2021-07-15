@@ -15,7 +15,7 @@
             <tbody class="text-nowrap">
                 <?php
                 $userID = isLogin() ? $_SESSION['user']->getID() : 0;
-                $admin = isAdmin($userID, $conn);
+                $admin = isAdmin();
                 if ($stmt = $conn -> prepare("SELECT `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, `problem`.`author` as probAuthor, `user`.`name` as username, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = ? AND `submission`.`problem` = `problem`.`id` ORDER BY `submission`.`id` DESC LIMIT 1) as subResult FROM `problem` INNER JOIN `user` WHERE `user`.`std_id` = `problem`.`author` ORDER BY `problem`.`id`")) {
                     $stmt->bind_param('i', $userID);
                     $stmt->execute();

@@ -1,5 +1,5 @@
 <?php 
-    needAdmin($conn);
+    needAdmin();
 
     $id = -1; $title = ""; $article = ""; $prop = ""; $category = "general"; $hide = 0; $last_hide_updated = time(); $author = "";
     if (isset($_GET['id'])) {

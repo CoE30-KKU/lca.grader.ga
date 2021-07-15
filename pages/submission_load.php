@@ -20,7 +20,7 @@
     $start_id = ($current_page - 1) * $limit;
 
     $logged_in = isLogin();
-    $admin = $logged_in ? isAdmin($_SESSION['id'], $conn) : false;
+    $admin = $logged_in ? isAdmin() : false;
 
     global $conn;
     if ($stmt = $conn -> prepare("SELECT `submission`.`id` as id, `submission`.`user` as user, `submission`.`problem` as problem, `submission`.`result` as result, `submission`.`score` as score, `submission`.`maxScore` as maxScore, `submission`.`uploadtime` as uploadtime, `problem`.`id` as probID, `problem`.`score` as probScore, `problem`.`name` as probName, `problem`.`codename` as probCodename, `user`.`name` as userDisplayname, `user`.`properties` as userProperties FROM `submission` INNER JOIN `problem` ON `problem`.`id` = `submission`.`problem` INNER JOIN `user` ON `user`.`id` = `submission`.`user` ORDER BY `submission`.`id` DESC LIMIT ?,?")) {

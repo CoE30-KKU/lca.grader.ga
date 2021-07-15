@@ -71,6 +71,21 @@
         return null;
     }
 
+    function getUserDataID(int $id) {
+        global $conn;
+        if ($stmt = $conn->prepare('SELECT * FROM `user` WHERE `user`.`id` = ?')) {
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    return $row;
+                }
+            }
+        }
+        return null;
+    }
+
     function getProbData(int $id) {
         global $conn;
         if ($stmt = $conn->prepare('SELECT * FROM `problem` WHERE `problem`.`id` = ?')) {
@@ -261,16 +276,14 @@
     }
 
     //TODO : Legacy code
-    function user($id, $conn) {
-        $rainbow = !empty(getUserdata($id,'properties',$conn)) ? array_key_exists("rainbow", json_decode(getUserdata($id,'properties',$conn),true)) : false;
-        $name = getUserdata($id, 'name', $conn) . " (".getUserdata($id,'std_id', $conn).")";
-        if ($rainbow)
-            $name = '<text class="rainbow">'. $name . '</text>';
-        return $name;
-    }
+    function user($id) {
+        $raw_user = getUserDataID($id);
+        $properties = json_decode($raw_user['properties'], true);
 
-    function prob($id, $conn) {
-        return getProbdata($id, 'name', $conn)." <span class='badge badge-coekku'>".getProbdata($id, 'codename', $conn)."</span>";
+        $rainbow = array_key_exists("rainbow", $properties) ? $properties['rainbow'] : false;
+        $name = $raw_user['name'] . " (".$raw['std_id'].")";
+        if ($rainbow) $name = '<text class="rainbow">'. $name . '</text>';
+        return $name;
     }
 
     function countScore($result, $full = 100) {

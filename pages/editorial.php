@@ -1,4 +1,4 @@
-<?php $cat = array("Java"=>countCategory("Java", $conn), "Python"=>countCategory("Python", $conn), "C"=>countCategory("C",$conn), "LCA"=>countCategory("LCA",$conn),"General"=>countCategory("General",$conn),"Update"=>countCategory("Update",$conn)); ?>
+<?php $cat = array("Java"=>countCategory("Java"), "Python"=>countCategory("Python"), "C"=>countCategory("C"), "LCA"=>countCategory("LCA"),"General"=>countCategory("General"),"Update"=>countCategory("Update")); ?>
 
 <div class="container" style="padding-top: 88px;">
     <div class="container mb-3" id="container">

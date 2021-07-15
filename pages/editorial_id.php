@@ -31,7 +31,7 @@
     <div class="container mb-3" id="container">
         <h2 class="font-weight-bold text-coekku"><?php echo $title; ?> <span
             class='badge badge-coekku'><?php echo strtoupper($category); ?></span>
-            <?php if (isLogin() && isAdmin($_SESSION['id'], $conn)) { 
+            <?php if (isAdmin()) { 
                 echo '<a href="../pages/editorial_toggle_view.php?editorial_id='.$id.'&hide='.$hide.'">'; 
                 if ($hide) { echo '<i class="fas fa-eye-slash"></i>'; } else { echo '<i class="fas fa-eye"></i>'; } echo '</a>'; 
                 echo '&nbsp;<a href="../editorial/edit-'.$id.'"><i class="fas fa-pencil-alt"></i></a>';
@@ -56,7 +56,7 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="font-weight-bold text-coekku">Category</h5>
-                        <?php $cat = array("Java"=>countCategory("Java", $conn), "Python"=>countCategory("Python", $conn), "C"=>countCategory("C",$conn), "LCA"=>countCategory("LCA",$conn),"General"=>countCategory("General",$conn),"Update"=>countCategory("Update",$conn)); ?>
+                        <?php $cat = array("Java"=>countCategory("Java"), "Python"=>countCategory("Python"), "C"=>countCategory("C"), "LCA"=>countCategory("LCA"),"General"=>countCategory("General"),"Update"=>countCategory("Update")); ?>
                         <p>
                             <ul>
                                 <li><a href="../editorial/category=Java">Java (<?php echo $cat["Java"]; ?>)</a></li>
