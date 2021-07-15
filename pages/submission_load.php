@@ -16,7 +16,7 @@
     }
 
     $current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-    $limit = 100; //How many post per page
+    $limit = 500; //How many post per page
     $start_id = ($current_page - 1) * $limit;
 
     $logged_in = isLogin();

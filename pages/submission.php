@@ -81,6 +81,7 @@
                         OnlyMe = true;
                         $(this).hide();
                     });
+                    if ($(document).height() <= $(window).height()) loadMore();
                 } else {
                     $(".ThisIsNotMine").each(function() {
                         OnlyMe = false;
