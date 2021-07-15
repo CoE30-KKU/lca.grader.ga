@@ -3,7 +3,7 @@
     require_once '../static/functions/function.php';
 
     if (isLogin()) {
-        $userID = (int) $_SESSION['id'];
+        $userID = $_SESSION['user']->getID();
         $probID = (int) $_POST['probID'];
         $probCodename = $_POST['probCodename'];
         $fileName = time();

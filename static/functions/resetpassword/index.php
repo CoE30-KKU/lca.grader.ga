@@ -1,21 +1,28 @@
 <?php
-    require '../connect.php';
-    require '../function.php';
+    require_once '../connect.php';
+    require_once '../function.php';
 
     $key = $_GET['key'];
     $email = $_GET['email'];
 
-    $query1 = "SELECT * FROM `user` WHERE email = '$email' AND password = '$key'";
-    $result1 = mysqli_query($conn, $query1);
-    if (! $result1) {
-        die('Could not get data: ' . mysqli_error($conn));
-    }
-    $id = mysqli_fetch_array($result1, MYSQLI_ASSOC)['id'];
-    if (mysqli_num_rows($result1) == 0) {
+    global $conn;
+    if ($stmt = $conn->prepare("SELECT `id`,`username`,`password` FROM `user` WHERE json_extract(`tempAuthKey`. `$.key`) = ? AND email = ? LIMIT 1")) {
+        $stmt->bind_param('ss', $key, $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows == 1) {
+            while ($row = $result->fetch_assoc()) {
+                if (useAuthKey($key, $row['id'], 30*60)) {
+                    header("Location: ../auth/login.php?user=".$row['username']."&pass=".$row['password']."&method=reset");
+                    die();
+                }
+            }
+        }
         $_SESSION['swal_error'] = "ไม่สามารถรีเซ็ตรหัสผ่าน";
         $_SESSION['swal_error_msg'] = "พบข้อผิดพลาด: ข้อมูลไม่ตรงกับฐานข้อมูล";
         header("Location: ../../../home/");
-    } else {
-        header("Location: ../auth/login.php?user=$email&pass=".getUserdata($id, 'password', $conn)."&method=reset");
+        die();
     }
+    header("Location: ../../../home/");
+
 ?>

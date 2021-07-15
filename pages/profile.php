@@ -1,25 +1,11 @@
 <?php
 
+    $user = -1;
     if (isset($_GET['id'])) {
-        $profile_id = (int) $_GET['id'];
+        $user = new User((String) $_GET['id']);    
+        if ($user->getID() == -1) header("Location: ../home/");
     } else if (isLogin()) {
-        $profile_id = (int) $_SESSION['id'];
-    } else {
-        header("Location: ../home/");
-    }
-
-    $pic = ""; 
-    if ($stmt = $conn -> prepare("SELECT * FROM `user` WHERE id = ?")) {
-        $stmt->bind_param('i', $profile_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows == 1) {
-            while ($row = $result->fetch_assoc()) {
-                $pic = !empty($row['profile']) ? $row['profile'] : "../static/elements/user.svg";
-            }
-        } else {
-            header("Location: ../home/");
-        }
+        $user = $_SESSION['user'];
     } else {
         header("Location: ../home/");
     }
@@ -28,16 +14,16 @@
 <div class="container" style="padding-top: 88px;">
     <div class="container mb-3" id="container">
     <form method="POST" action="../pages/profile_save.php" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?php echo $profile_id; ?>"/>
+        <input type="hidden" name="id" value="<?php echo $user->getID(); ?>"/>
         <div class="row">
                 <div class="col-12 col-md-4">
                     <div class="card mb-3">
                         <div class="card-body">
-                            <img src="<?php echo $pic; ?>" class="card-img-top img-fluid mb-3" alt="Profile" id="profile_preview">
+                            <img src="<?php echo $user->getProfile(); ?>" class="card-img-top img-fluid mb-3" alt="Profile" id="profile_preview">
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="profile_upload" id="profile_upload" aria-describedby="profile_upload" accept="image/*"/>
-                                    <input type="hidden" name="real_profile_url" id="real_profile_url" value="<?php echo $pic; ?>"/>
+                                    <input type="hidden" name="real_profile_url" id="real_profile_url" value="<?php echo $user->getProfile(); ?>"/>
                                     <label class="custom-file-label" for="profile_upload">Choose file</label>
                                 </div>
                             </div>
@@ -58,8 +44,8 @@
                                         <span class="input-group-text md-addon">ชื่อที่แสดง</span>
                                     </div>
                                     <input type="text" class="form-control mr-sm-3" id="name" name="name"
-                                        placeholder="<?php echo getUserdata($profile_id, 'name', $conn); ?>"
-                                        value="<?php echo getUserdata($profile_id, 'name', $conn); ?>" disabled>
+                                        placeholder="<?php echo $user->getName(); ?>"
+                                        value="<?php echo $user->getName(); ?>" disabled>
                                 </div>
                                 <!-- name -->
                                 <!-- Security Zone -->
@@ -71,10 +57,10 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text md-addon">อีเมล</span>
                                     </div>
-                                    <input type="hidden" id="real_email" name="real_email" value="<?php echo getUserdata($profile_id, 'email', $conn); ?>">
+                                    <input type="hidden" id="real_email" name="real_email" value="<?php echo $user->getEmail(); ?>">
                                     <input type="text" class="form-control mr-sm-3" id="email" name="email"
-                                        placeholder="<?php echo getUserdata($profile_id, 'email', $conn); ?>"
-                                        value="<?php echo getUserdata($profile_id, 'email', $conn); ?>" required>
+                                        placeholder="<?php echo $user->getEmail(); ?>"
+                                        value="<?php echo $user->getEmail(); ?>" required>
                                 </div>
                                 <!-- Email -->
                                 <!-- Password -->
@@ -154,7 +140,7 @@ $(document).ready(function () {
                 url: "../pages/profile_upload.php",
                 type: "POST",
                 data: {
-                    "userID": <?php echo $profile_id; ?>,
+                    "userID": <?php echo $user->getID(); ?>,
                     "image": response
                 },
                 success: function (data) {

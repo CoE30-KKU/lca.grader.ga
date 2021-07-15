@@ -3,20 +3,11 @@
     require_once '../static/functions/function.php';
     require_once '../vendor/parsedown/Parsedown.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="th" prefix="og:http://ogp.me/ns#">
-
-<head>
-    <?php require_once '../static/functions/head.php'; ?>
-</head>
+<head><?php require_once '../static/functions/head.php'; ?></head>
 <?php require_once '../static/functions/navbar.php'; ?>
-<body>
-    <?php   if (isDarkmode()) { ?>
-                <script>document.body.setAttribute("data-theme", "dark")</script>
-    <?php   } else { ?>
-                <script>document.body.removeAttribute("data-theme")</script>
-    <?php   } ?>
+<body <?php if (isDarkmode()) echo "data-theme='dark'"; ?>>
     <?php if (isset($_GET['target']) && file_exists($_GET['target'])) require_once $_GET['target']; ?>
     <?php require_once '../static/functions/popup.php'; ?>
     <?php require_once '../static/functions/footer.php'; ?>

@@ -5,7 +5,7 @@
     if (!isLogin()) {
         header("Location: ../home/");
     } else {
-        if (isset($_GET['problem_id']) && isOwner($_GET['problem_id'], $conn)) {
+        if (isset($_GET['problem_id']) && isOwner($_GET['problem_id']) && !isset($_GET['method'])) {
             $problem_id = (int) $_GET['problem_id'];
             if ($stmt = $conn -> prepare("UPDATE `submission` SET result='W' WHERE problem = ?")) {
                 $stmt->bind_param('i', $problem_id);
@@ -21,7 +21,7 @@
                 $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้";
             }
             header("Location: ../problem/$problem_id");
-        } else if (isset($_GET['method']) && isAdmin($_SESSION['id'], $conn)) {
+        } else if (isset($_GET['method']) && isAdmin()) {
             switch($_GET['method']) {
                 case "JudgeError":
                     if ($stmt = $conn -> prepare("UPDATE `submission` SET result='W' WHERE result = 'JudgeError'")) {

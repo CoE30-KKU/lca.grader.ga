@@ -30,7 +30,6 @@
         if ($result->num_rows > 0) {
             $i = 0;
             while ($row = $result->fetch_assoc()) {
-                $me = ($logged_in && ($_SESSION['id'] == $row['user'] || $admin)) ? "data-owner='true'" : "data-owner='false'";
                 $subID = $row['id'];
                 $subUser = usergen($row['userDisplayname'], $row['userProperties']);
                 $subProb = probgen($row['probName'], $row['probCodename']);
@@ -40,7 +39,7 @@
                 $subUploadtime = $row['uploadtime']; 
                 $clfl = (isLogin() && $_SESSION['id'] == $row['user']) ? "ThisIsMine" : "ThisIsNotMine";
                 $i++; ?>
-                <tr style="cursor: pointer;" class='launchModal <?php echo $clfl; ?>' <?php echo $me;?> id='sub<?php echo $subID;?>' data-toggle='modal' data-target='#modalPopup' data-title='Submission #<?php echo $subID; ?>' data-id='<?php echo $subID; ?>' data-uid='<?php echo $subUser; ?>'>
+                <tr style="cursor: pointer;" onclick='launchSubmissionModal(<?php echo $subID; ?>);' class='<?php echo $clfl; ?>' id='sub<?php echo $subID;?>' data-toggle='modal' data-target='#modalPopup'>
                     <th scope='row' data-order='<?php echo $i; ?>'><?php echo $subID; ?></th>
                     <td data-order='<?php echo $i; ?>'><?php echo $subUploadtime; ?></td>
                     <td><?php echo $subUser; ?></td>

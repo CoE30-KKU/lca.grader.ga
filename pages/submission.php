@@ -88,6 +88,23 @@
                     });
                 }
             });
+
+            function launchSubmissionModal(id) {
+                document.getElementById("modalTitle").innerHTML = "Submission #" + id;
+                document.getElementById("modalBody").innerHTML = '<div class="d-flex justify-content-center"><img class="img-fluid" align="center" src="<?php echo randomLoading(); ?>"></div>';
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '../pages/submission_gen.php',
+                    data: { 'id': id, 'who': <?php echo (isLogin()) ? $_SESSION['user']->getID() : -1; ?> },
+                    success: function (data) { 
+                        document.getElementById("modalBody").innerHTML = data;
+                        $('pre > code').each(function() {
+                            hljs.highlightBlock(this);
+                        });
+                    }
+                })
+            }
         </script>
     </div>
 </div>

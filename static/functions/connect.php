@@ -1,17 +1,23 @@
-<?php
+<?php declare(strict_types=1);
     ob_start();
-    session_start(); if (!isset($_SESSION['dark_mode'])) $_SESSION['dark_mode'] = false;
+    require_once 'init.php';
+    session_start();
+
     $start_time = microtime(TRUE);
-    $dbhost = "203.159.94.111";
-    $dbuser = "graderga";
-    $dbpass = "8db!#yYvK]8Lw6F|37wz:UwU";
-    $dbdatabase = "lca.grader.ga";
-    $conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbdatabase); 
+    if (!isset($_SESSION['dark_mode'])) $_SESSION['dark_mode'] = false;
+
+    require_once 'config.php';
+    
+    global $conn;
+    $conn = new mysqli($db["hostname"], $db["username"], $db["password"], $db["table"]);
     mysqli_set_charset($conn, 'utf8mb4');
+
+    if(!$conn)
+        die('Internal Server Error: Cannot established connection with database -- ' . mysqli_connect_error());
 
     $private_key = md5("THANK YOU OTOG.CF, OTOG.ORG, PROGRAMMING.IN.TH, KIYAGO, GAREDAMI");
 
-    if(!$conn)  die('Could not connect: ' . mysqli_error($conn));
+    require_once 'function.php';
     
     @ini_set('upload_max_size','128M');
     @ini_set('post_max_size','128M');

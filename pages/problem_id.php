@@ -12,9 +12,9 @@
                 $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
                 $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
 
-                $owner = isOwner($id, $conn);
+                $owner = isOwner($id);
 
-                if ($hide && (!isLogin() || (!isAdmin($_SESSION['id'], $conn) && strcmp($_SESSION['std_id'], $author) !== 0)))
+                if ($hide && (!isLogin() || (!isAdmin() && !$owner)))
                     header("Location: ../problem/");
             }
             $stmt->free_result();
@@ -28,7 +28,7 @@
 <div class="container mb-3" style="padding-top: 88px;" id="container">
     <h2 class="font-weight-bold text-coekku"><?php echo $name; ?> <span
             class='badge badge-coekku'><?php echo $codename; ?></span>
-        <?php if ($owner) { echo '<a href="../pages/problem_toggle_view.php?problem_id='.$id.'&hide='.$hide.'">'; if ($hide) { echo '<i class="fas fa-eye-slash"></i>'; } else { echo '<i class="fas fa-eye"></i>'; } echo '</a>'; } ?>
+        <?php if ($owner) { echo "<a href=\"../pages/problem_toggle_view.php?problem_id=$id&hide=$hide\">"; if ($hide) { echo '<i class="fas fa-eye-slash"></i>'; } else { echo '<i class="fas fa-eye"></i>'; } echo '</a>'; } ?>
     </h2>
     <small class="text-muted"><?php echo $author; ?></small>
     <hr>
@@ -122,20 +122,23 @@
                         <form method="post" action="../pages/problem_user_submit.php" enctype="multipart/form-data">
                             <h5 class="font-weight-bold text-coekku">Submission</h5>
                             <?php
-                            $count = 0;
-                            if ($stmt = $conn -> prepare("SELECT count(`submission`.`id`) as c FROM `submission` WHERE user = ? and problem = ? ORDER BY `id`")) {
-                                $user = $_SESSION['id'];
-                                $stmt->bind_param('ii', $user, $id);
-                                $stmt->execute();
-                                $result = $stmt->get_result();
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        $count = (int) $row['c'];
+                            /*
+                                //Count how much this user submit this problem.
+                                $count = 0;
+                                if ($stmt = $conn -> prepare("SELECT count(`submission`.`id`) as c FROM `submission` WHERE user = ? and problem = ? ORDER BY `id`")) {
+                                    $user = $_SESSION['user']->getID();
+                                    $stmt->bind_param('ii', $user, $id);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            $count = (int) $row['c'];
+                                        }
                                     }
                                 }
-                            }
+                            */
                             ?>
-                            <textarea class="form-control" id="answer" name="answer" class="answer" rows="8" style="white-space: pre;" required><?php echo latestSubmissionCode($_SESSION['id'], $id, $conn);?></textarea>
+                            <textarea class="form-control" id="answer" name="answer" class="answer" rows="8" style="white-space: pre;" required><?php echo latestSubmissionCode($_SESSION['user']->getID(), $id);?></textarea>
                             <button type="submit" id="submitbtn" value="prob" name="submit"
                                 class="btn btn-block btn-coekku btn-md" disabled>Submit</button>
                             <script>
@@ -167,7 +170,7 @@
                                     <?php
                                     $html = "";
                                     if ($stmt = $conn -> prepare("SELECT `submission`.`id` as id,`submission`.`score` as score,`submission`.`maxScore` as maxScore,`submission`.`uploadtime` as uploadtime,`submission`.`result` as result,`problem`.`score` as probScore FROM `submission` INNER JOIN `problem` ON `problem`.`id` = `submission`.`problem` WHERE user = ? and problem = ? ORDER BY `id` DESC LIMIT 5")) {
-                                        $user = $_SESSION['id'];
+                                        $user = $_SESSION['user']->getID();
                                         $stmt->bind_param('ii', $user, $id);
                                         $stmt->execute();
                                         $result = $stmt->get_result();
@@ -175,7 +178,7 @@
                                             while ($row = $result->fetch_assoc()) {
                                                 $subID = $row['id'];
                                                 $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
-                                                $subScore = ($row['score']/$row['maxScore'])*$row['probScore'];
+                                                $subScore = sprintf("%.2f", ($row['score']/$row['maxScore'])*$row['probScore']);
                                                 //$subRuntime = $row['runningtime']/1000;
                                                 $subUploadtime = str_replace("-", "/", $row['uploadtime']); ?>
                                     <tr style="cursor: pointer;" class='launchModal' onclick='javascript:;'

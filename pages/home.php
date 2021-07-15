@@ -12,7 +12,7 @@
                     if ($stmt = $conn -> prepare("SELECT `codename`,`id`,`name`,`properties` FROM `problem` WHERE JSON_EXTRACT(`properties`,'$.hide') = false AND UNIX_TIMESTAMP() - JSON_EXTRACT(`properties`,'$.last_hide_updated') <= 604800 AND JSON_EXTRACT(`properties`,'$.last_hide_updated') > 0 ORDER BY JSON_EXTRACT(`properties`,'$.last_hide_updated') DESC limit 7")) {
                         $stmt->execute();
                         $result = $stmt->get_result();
-                        if ($result->num_rows > 0) { $html = "";?>
+                        if ($result->num_rows > 0) { ?>
                             <div class="bounceInLeft delay-1s animated">
                             <h5 class="rainbow mt-3">โจทย์มาใหม่!!</h5>
                             <div class="table-responsive">
@@ -30,13 +30,12 @@
                                     $prop = json_decode($row['properties'],true);
                                     $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
                                 
-                                    $html .= "<tr onclick='window.open(\"../problem/$id\")'>
+                                    echo "<tr onclick='window.open(\"../problem/$id\")'>
                                         <th class='text-right' scope='row'><a href=\"../problem/$id\" target=\"_blank\">$id</a></th>
                                         <td><a href=\"../problem/$id\" target=\"_blank\">$name <span class='badge badge-coekku'>$codename</span></a></td>
                                         <td data-order='".$rate."'>".rating($rate)."</td>
                                     </tr>";
-                                }
-                                echo $html; ?>
+                                } ?>
                             </table></div></div>
                             <?php }
                             $stmt->free_result();
@@ -44,16 +43,12 @@
                         } ?>
                 </div>
                 <div class="fadeIn animated">
-                    <?php
-                        $files = glob("../static/elements/index/*.*", GLOB_BRACE);
-                        $targetSrc = $files[rand(0,count($files)-1)];
-                    ?>
-                    <img src="<?php echo $targetSrc; ?>" class="mt-3 img-fluid w-100 d-block d-md-none">
+                    <img src="../static/elements/1093201.svg" onContextMenu="return false;" class="mt-3 img-fluid w-100 d-block d-md-none">
                 </div>
             </div>
             <div class="col-12 col-md-6 d-none d-md-block">
                 <div class="fadeIn animated">
-                    <img src="<?php echo $targetSrc; ?>" class="img-fluid w-100">
+                    <img src="../static/elements/1093201.svg" onContextMenu="return false;" class="img-fluid w-100">
                 </div>
             </div>
         </div>

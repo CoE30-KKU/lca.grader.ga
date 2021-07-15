@@ -8,7 +8,7 @@
             $isCreate = $_POST['problem'] == "create" ? 1 : 0; //Create(true) or Edit(false)
             $probName = $_POST['name'];
             $probCodename = $_POST['codename'];
-            $probAuthor = $_SESSION['std_id'];
+            $probAuthor = $_SESSION['user']->getUsername();
             
             $properties = json_encode(array(
                 "hide" => (bool) $_POST['hide'],
@@ -16,24 +16,25 @@
                 "rating" => (int) $_POST['rating']
             ));
             
-            $id = $isCreate ? latestIncrement($dbdatabase, 'problem', $conn) : $_GET['id'];
+            $id = $isCreate ? latestIncrement($dbdatabase, 'problem') : $_GET['id'];
 
-            if (!$isCreate && !isOwner($id, $conn)) {
+            if (!$isCreate && !isOwner($id)) {
                 $_SESSION['swal_error'] = "ACCESS DENIED";
                 $_SESSION['swal_error_msg'] = "You don't have enough permission!";
                 header("Location: ../problem/");
             }
 
-            $locate ="../file/judge/prob/$id/";
-            if (!file_exists($locate))
-                if (!mkdir($locate))
-                    die("Can't mkdir");
-
+            
             if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
                 $file = glob($locate . $probCodename . "*.pdf");
                 foreach($file as $f) unlink($f); //Remove all [testcase].[pdf] in problem directory before upload new
                 $name_file = $probCodename . generateRandom(5) . ".pdf";
                 $tmp_name = $_FILES['pdfPreview']['tmp_name'];
+                $locate ="../file/judge/prob/$id/";
+                if (!file_exists($locate))
+                    if (!make_directory($locate))
+                        die("Can't mkdir");
+                
                 if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
             }
 

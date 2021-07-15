@@ -2,7 +2,7 @@
     require_once '../static/functions/connect.php';
     require_once '../static/functions/function.php';
     $problem_id = "";
-    if (isLogin() && isAdmin($_SESSION['id'], $conn) && isset($_GET['problem_id'])) {
+    if (isOwner($_GET['problem_id'])) {
         $problem_id = (int) $_GET['problem_id'];
         $problem_hide = (int) $_GET['hide'] ? 0 : 1;
         $properties = json_encode(array("hide"=>$problem_hide,"last_hide_updated"=>time()));

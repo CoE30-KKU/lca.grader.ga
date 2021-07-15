@@ -1,7 +1,7 @@
 <?php needLogin();
-    $probName = "";$probCodename = ""; $probScore = 100; $probRate = ""; $id = -1; $accept = ""; $hide = 0; $last_hide_updated = time(); $answer = "";
+    $probName = "";$probCodename = ""; $probScore = 100; $probRate = ""; $id = -1; $hide = 0; $last_hide_updated = time(); $answer = "";
     if (isset($_GET['id'])) {
-        needOwner($_GET['id'], $conn);
+        needOwner($_GET['id']);
         $id = (int) $_GET['id'];
         if ($stmt = $conn -> prepare("SELECT * FROM `problem` WHERE id = ?")) {
             $stmt->bind_param('i', $id);
@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-12 col-md-3">
                         <div class="md-form">
-                            <input type="text" id="author" name="author" class="form-control" disabled value="<?php if (!empty($probAuthor)) echo $probAuthor; else echo $_SESSION['name']; ?>"/>
+                            <input type="text" id="author" name="author" class="form-control" disabled value="<?php if (!empty($probAuthor)) echo $probAuthor; else echo $_SESSION['user']->getName(); ?>"/>
                             <label class="form-label" for="author">Author</label>
                         </div>
                     </div>
