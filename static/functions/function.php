@@ -53,7 +53,9 @@
 
     function isOwner($probID) {
         if (!isLogin()) return false;
-        return (isAdmin() || strcmp($_SESSION['user']->getUsername(), ((new Problem($probID))->writer())->getUsername()) == 0);
+        $prob = new Problem((int) $probID);
+        $prob_author = $prob->writer()->getUsername();
+        return (isAdmin() || ($_SESSION['user']->getUsername() == $prob_author));
     }
 
     function getUserData(String $username) {

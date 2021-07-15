@@ -99,9 +99,9 @@
             if (!empty($data)) {
                 $this->name = $data['name'];
                 $this->codename = $data['codename'];
-                $this->writer = $data['author'];
                 $this->score = $data['score'];
                 $this->properties = json_decode($data['properties'], true);
+                $this->setWriter($data['author']);
             } else {
                 $this->id = -1;
             }
@@ -188,7 +188,7 @@
                 $this->id = $data['id'];
                 $this->name = $data['name'];
                 $this->email = $data['email'];
-                //$this->user = $data['username'];
+                //$this->user = $data['std_id'];
                 $this->profile = $data['profile'];
                 $this->properties = json_decode($data['properties'], true);
             } else {
