@@ -37,7 +37,7 @@
                 $subScore = $row['maxScore'] != 0 ? ($row['score']/$row['maxScore'])*$row['probScore'] : "UNDEFINED";
                 //$subRuntime = $row['runningtime']/1000;
                 $subUploadtime = $row['uploadtime']; 
-                $clfl = (isLogin() && $_SESSION['id'] == $row['user']) ? "ThisIsMine" : "ThisIsNotMine";
+                $clfl = (isLogin() && $_SESSION['user']->getID() == $row['user']) ? "ThisIsMine" : "ThisIsNotMine";
                 $i++; ?>
                 <tr style="cursor: pointer;" onclick='launchSubmissionModal(<?php echo $subID; ?>);' class='<?php echo $clfl; ?>' id='sub<?php echo $subID;?>' data-toggle='modal' data-target='#modalPopup'>
                     <th scope='row' data-order='<?php echo $i; ?>'><?php echo $subID; ?></th>

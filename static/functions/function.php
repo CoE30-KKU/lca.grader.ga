@@ -278,10 +278,10 @@
     //TODO : Legacy code
     function user($id) {
         $raw_user = getUserDataID($id);
-        $properties = json_decode($raw_user['properties'], true);
+        $properties = $raw_user['properties'] != null ? json_decode($raw_user['properties'], true) : array();
 
         $rainbow = array_key_exists("rainbow", $properties) ? $properties['rainbow'] : false;
-        $name = $raw_user['name'] . " (".$raw['std_id'].")";
+        $name = $raw_user['name'] . " (".$raw_user['std_id'].")";
         if ($rainbow) $name = '<text class="rainbow">'. $name . '</text>';
         return $name;
     }

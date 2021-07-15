@@ -24,17 +24,16 @@
                 header("Location: ../problem/");
             }
 
+            $locate ="../file/judge/prob/$id/";
+            if (!file_exists($locate))
+                if (!make_directory($locate))
+                    die("Can't mkdir");
             
             if (isset($_FILES['pdfPreview']['name']) && $_FILES['pdfPreview']['name'] != "") {
                 $file = glob($locate . $probCodename . "*.pdf");
                 foreach($file as $f) unlink($f); //Remove all [testcase].[pdf] in problem directory before upload new
                 $name_file = $probCodename . generateRandom(5) . ".pdf";
                 $tmp_name = $_FILES['pdfPreview']['tmp_name'];
-                $locate ="../file/judge/prob/$id/";
-                if (!file_exists($locate))
-                    if (!make_directory($locate))
-                        die("Can't mkdir");
-                
                 if (!move_uploaded_file($tmp_name,$locate.$name_file)) die("Can't upload file");
             }
 

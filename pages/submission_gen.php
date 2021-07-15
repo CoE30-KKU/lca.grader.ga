@@ -10,7 +10,7 @@
         if ($result->num_rows == 1) {
             while ($row = $result->fetch_assoc()) {
                 $subID = $row['id'];
-                $subUser = user($row['user'], $conn);
+                $subUser = user($row['user']);
                 $subProb = $row['problem'];
                 $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
                 $subUploadtime = $row['uploadtime']; ?>

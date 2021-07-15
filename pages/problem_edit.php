@@ -1,5 +1,5 @@
 <?php needLogin();
-    $probName = "";$probCodename = ""; $probScore = 100; $probRate = ""; $id = -1; $hide = 0; $last_hide_updated = time(); $answer = "";
+    $probName = "";$probCodename = ""; $probScore = 100; $probRate = ""; $id = -1; $hide = 0; $last_hide_updated = time(); $answer = ""; $num_tol = 0.001;
     if (isset($_GET['id'])) {
         needOwner($_GET['id']);
         $id = (int) $_GET['id'];
@@ -25,7 +25,7 @@
         } else {
             header("Location: ../problem/");
         }
-        $target_problem_path = "../file/judge/prob/$id/"; $answer = ""; $num_tol = 0.001;
+        $target_problem_path = "../file/judge/prob/$id/"; $answer = "";
         if (file_exists($target_problem_path."answer.txt"))
             $answer = fread(fopen($target_problem_path."answer.txt","r"), filesize($target_problem_path."answer.txt"));
         if (file_exists($target_problem_path."numtol.txt"))

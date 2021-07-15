@@ -24,7 +24,7 @@
         if ($result->num_rows > 0) {
 
             while ($row = $result->fetch_assoc()) {
-                $script = (isset($_GET['key']) && $_GET['key'] == $private_key) || (isLogin() && (isAdmin() || $row['user'] == $_SESSION['id'])) ? $row['script'] : "";
+                $script = (isset($_GET['key']) && $_GET['key'] == $private_key) || (isLogin() && (isAdmin() || $row['user'] == $_SESSION['user']->getID())) ? $row['script'] : "";
                 $e_arr = array(
                     "id" => $row['id'],
                     "user" => $row['user'],
