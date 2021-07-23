@@ -65,11 +65,13 @@
     <script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <!-- Croppie -->
-    <link rel="stylesheet" href="//raw.githubusercontent.com/Foliotek/Croppie/master/croppie.css" />
-    <script src="//raw.githubusercontent.com/Foliotek/Croppie/master/croppie.js"></script>
+    <link rel="stylesheet" href="//cdn.11th.studio/croppie/croppie.css" />
+    <script src="//cdn.11th.studio/croppie/croppie.js"></script>
     
     <!-- Fontawesome -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 
     <script src="//tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/highlight.pack.js"></script>
     <link href="//tutsplus.github.io/syntax-highlighter-demos/highlighters/highlightjs/styles/monokai_sublime.css" rel="stylesheet" type="text/css">
+
+    <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
