@@ -17,16 +17,12 @@
             } else if ($result->num_rows == 1) {
                 while ($row = $result->fetch_assoc()) {
                     $tempAuthKey = generateAuthKey($row['id']);
-
                     $var = array(
-                        "{{key}}"=>$tempAuthKey,
-                        "{{email}}"=>$email,
-                        "{{name}}"=>$row['displayname']
+                        "key"=>$tempAuthKey,
+                        "email"=>$email,
+                        "name"=>$row['displayname']
                     );
-
                     $sendMail = sendEmail($email, "สวัสดี " . $row['displayname'] . "! คุณได้ทำการส่งคำร้องขอรีเซ็ตรหัสผ่านเพื่อเข้าใช้งานเว็บไซต์ grader.ga", "http://grader.ga/static/functions/resetpassword/resetpassword.html", $var);
-                    print_r($sendMail);
-                    die();
                     if ($sendMail) {
                         $_SESSION['swal_success'] = "รีเซ็ตรหัสผ่านสำเร็จ";
                         $_SESSION['swal_success_msg'] = "กรุณาตรวจสอบที่อีเมลของท่านเพื่อดำเนินการต่อ";
