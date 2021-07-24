@@ -11,9 +11,12 @@
         global $mailconn;
         if ($stmt = $mailconn->prepare("INSERT INTO `mailsystem` (title, sender, receiver, mail, variable) VALUES (?,?,?,?,?)")) {
             $stmt->bind_param('sssss', $title, $mailsenderData, $targetEmail, $emailTemplatePath, $variable);
-            $stmt->execute();
+            if ($stmt->execute()) {
+                return true;
+            }
+        } else {
             print_r($mailconn->error);
-            die();
+            return false;
         }
     }
 ?>

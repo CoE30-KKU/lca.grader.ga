@@ -56,6 +56,7 @@
                 echo "ACCEPT";
                 if (isset($_GET['method'])) {
                     if ($_GET['method'] == "reset") {
+                        $_SESSION['allowAccessResetpasswordPage'] = true;
                         header("Location: ../../../resetpassword/");
                     }
                 }

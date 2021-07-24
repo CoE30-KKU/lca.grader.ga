@@ -1,3 +1,4 @@
+<?php if (!isset($_SESSION['allowAccessResetpasswordPage']) || $_SESSION['allowAccessResetpasswordPage'] == false) back(); ?>
 <div class="container" id="container" style="padding-top: 88px; min-height:100vh;">
     <div class="center">
         <form method="post" action="../pages/password_resetpass.php" enctype="multipart/form-data">
