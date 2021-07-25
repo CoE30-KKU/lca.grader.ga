@@ -27,7 +27,7 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="../vendor/mdbootstrap-4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link href="//cdn.11th.studio/mdbootstrap-4.19.1/css/mdb.min.css" rel="stylesheet">
     
     <!-- Custom Style -->
     <link href="../static/style.css" rel="stylesheet">
@@ -43,16 +43,16 @@
     <script src="//code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../vendor/mdbootstrap-4.19.1/js/mdb.min.js"></script>
+    <script type="text/javascript" src="//cdn.11th.studio/mdbootstrap-4.19.1/js/mdb.min.js"></script>
 
     <!-- Bootstrap-Table -->
     <link href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
     <!-- Editor.MD -->
-    <link rel="stylesheet" href="//grader.ga/vendor/editor.md/css/editormd.css" />
-    <script src="//grader.ga/vendor/editor.md/editormd.min.js"></script>
-    <script src="//grader.ga/vendor/editor.md/languages/en.js"></script>
+    <link rel="stylesheet" href="//cdn.11th.studio/editor.md/css/editormd.css" />
+    <script src="//cdn.11th.studio/editor.md/editormd.min.js"></script>
+    <script src="//cdn.11th.studio/editor.md/languages/en.js"></script>
 
     <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">

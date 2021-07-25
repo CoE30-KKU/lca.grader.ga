@@ -3,7 +3,7 @@
     <div class="center">
     <h1 class="display-5 font-weight-bold text-center text-coekku">LOGIN <i class="fas fa-sign-in-alt"></i></h1>
     <div class="alert alert-info" role="alert">สำหรับผู้ที่เข้ามาครั้งแรก <br>Email คือ <text class="font-weight-bold">KKUMail ของนักศึกษา</text><br>รหัสผ่าน คือ <text class="font-weight-bold">รหัสประจำตัวนักศึกษา<u>มีขีด</u></text></div>
-    <form method="post" action="../static/functions/auth/login.php" enctype="multipart/form-data">
+    <form id="loginForm" method="post" action="../static/functions/auth/login.php" enctype="multipart/form-data">
         <div class="card z-depth-1">
             <!--Body-->
             <div class="card-body">
@@ -32,8 +32,8 @@
     </div>
 </div>
 <script>
-    $("form").submit(function(event) {
-        var hcaptchaVal = $('[name=h-captcha-response]').value;
+    document.querySelector("#loginForm").addEventListener("submit", function(event) {
+        var hcaptchaVal = document.querySelector('[name="h-captcha-response"]').value;
         if (hcaptchaVal === "") {
             event.preventDefault();
             swal("Oops","Please complete captcha!", "error");
