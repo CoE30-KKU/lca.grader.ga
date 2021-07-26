@@ -23,7 +23,7 @@
                 <div class="h-captcha" data-sitekey="d9826c31-b8d7-4648-b04f-c5595ffb8c22"></div>
                 <button type="submit" class="btn btn-block btn-coekku mb-3">Login</button>
                 <input type="hidden" name="method" value="loginPage">
-                <a href="../forgetpassword/" class="text-danger">ลืมรหัสผ่านหรอ?</a>
+                <div class=" text-center"><a href="../forgetpassword/" class="text-danger">ลืมรหัสผ่าน</a></div>
                 <input type="hidden" name="referent" value="<?php $referent = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null; echo $referent;?>">
             </div>
         </div>
