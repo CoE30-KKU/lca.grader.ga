@@ -37,7 +37,7 @@
                     for($i = 51; $i <= 64; $i++) {
                         $score = (int) lastResult2($o,$i);
                         $total += $score;
-                        echo "td data-order=$score>$score</td>";
+                        echo "<td data-order=$score>$score</td>";
                     }
                     echo "<td data-order=$total>$total</td>";
                     echo "</tr>";

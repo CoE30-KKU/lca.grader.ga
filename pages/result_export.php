@@ -57,9 +57,9 @@ xmlns="http://www.w3.org/TR/REC-html40">
                 for($i = 51; $i <= 64; $i++) {
                     $score = (int) lastResult2($o,$i);
                     $total += $score;
-                    echo "td data-order=$score>$score</td>";
+                    echo "<td>$score</td>";
                 }
-                echo "<td data-order=$total>$total</td>";
+                echo "<td>$total</td>";
                 echo "</tr>";
             }
         ?>
