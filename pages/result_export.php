@@ -24,33 +24,44 @@ xmlns="http://www.w3.org/TR/REC-html40">
     </style>
 </head>
 <body>
-    <table >
+    <table>
         <tr>
             <th>#</th>
-            <th>std_id</th>
-            <th>name</th>
-            <th>A04Q1 (#41)</th>
-            <th>A04Q2 (#42)</th>
-            <th>A04Q3 (#43)</th>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>C1 Q1</th>
+            <th>C1 Q2</th>
+            <th>C2 Q1</th>
+            <th>C2 Q2</th>
+            <th>C2 Q3</th>
+            <th>C2 Q4</th>
+            <th>C2 Q5</th>
+            <th>C2 Q6</th>
+            <th>C2 Q7</th>
+            <th>C2 Q8</th>
+            <th>C2 Q9</th>
+            <th>C2 Q10</th>
+            <th>C2 Q11</th>
+            <th>C2 Q12</th>
             <th>Total</th>
         </tr>
         <?php 
-        for($o = 1; $o <= 91; $o++) {
-            $user = explode("(", user($o, $conn));
-            $score_41 = (int) lastResult2($o,41,$conn);
-            $score_42 = (int) lastResult2($o,42,$conn);
-            $score_43 = (int) lastResult2($o,43,$conn);
-            $total = $score_41 + $score_42 + $score_43;
-            echo "<tr>";
-            echo "<td>" . $o . "</td>";
-            echo "<td>" . str_replace(")", "", $user[1]) . "</td>";
-            echo "<td>" . $user[0] . "</td>";
-            echo "<td>$score_41</td>";
-            echo "<td>$score_42</td>";
-            echo "<td>$score_43</td>";  
-            echo "<td>$total</td>"; 
-            echo "</tr>";
-        }
+            $std = array(2,34,52,57,58,62,67,77,83,84,87);
+            foreach($std as $o) {
+                $user = explode("(", user($o));
+                echo "<tr>";
+                echo "<td>" . $o . "</td>";
+                echo "<td>" . str_replace(")", "", $user[1]) . "</td>";
+                echo "<td>" . $user[0] . "</td>";
+                $total = 0;
+                for($i = 51; $i <= 64; $i++) {
+                    $score = (int) lastResult2($o,$i);
+                    $total += $score;
+                    echo "td data-order=$score>$score</td>";
+                }
+                echo "<td data-order=$total>$total</td>";
+                echo "</tr>";
+            }
         ?>
         </table>
 </body>
