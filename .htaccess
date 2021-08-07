@@ -33,7 +33,6 @@ RewriteRule ^doc/([0-9]+)-(.*)$ pages/doc.php?id=$1&codename=$2
 RewriteRule ^login/$ pages/page_loader.php?target=login.php
 RewriteRule ^logout/$ static/functions/auth/logout.php
 
-Options +FollowSymlinks
 Options +Indexes
 IndexOptions +FancyIndexing
 DirectoryIndex .index.php .index.html index.php index.html .redirect.html redirect.html landing.html landing.php .landing.html .landing.php .redirect.php redirect.php
