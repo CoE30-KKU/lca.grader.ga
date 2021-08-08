@@ -8,20 +8,14 @@
                         <th>#</th>
                         <th>Student ID</th>
                         <th>Name</th>
-                        <th>C1 Q1</th>
-                        <th>C1 Q2</th>
-                        <th>C2 Q1</th>
-                        <th>C2 Q2</th>
-                        <th>C2 Q3</th>
-                        <th>C2 Q4</th>
-                        <th>C2 Q5</th>
-                        <th>C2 Q6</th>
-                        <th>C2 Q7</th>
-                        <th>C2 Q8</th>
-                        <th>C2 Q9</th>
-                        <th>C2 Q10</th>
-                        <th>C2 Q11</th>
-                        <th>C2 Q12</th>
+                        <th>C3 Q1</th>
+                        <th>C3 Q2</th>
+                        <th>C3 Q3</th>
+                        <th>C3 Q4</th>
+                        <th>C3 Q5</th>
+                        <th>C3 Q6</th>
+                        <th>C3 Q7</th>
+                        <th>C3 Q8</th>
                         <th>Total</th>
                     </tr>
                 </thead>
@@ -34,7 +28,7 @@
                     echo "<td>" . str_replace(")", "", $user[1]) . "</td>";
                     echo "<td>" . $user[0] . "</td>";
                     $total = 0;
-                    for($i = 51; $i <= 64; $i++) {
+                    for($i = 65; $i <= 72; $i++) {
                         $score = (int) lastResult2($o,$i);
                         $total += $score;
                         echo "<td data-order=$score>$score</td>";
