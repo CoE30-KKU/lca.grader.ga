@@ -6,7 +6,7 @@
     $start_time = microtime(TRUE);
     if (!isset($_SESSION['dark_mode'])) $_SESSION['dark_mode'] = false;
 
-    require_once 'config.php';
+    require_once 'conf.php';
     
     global $conn;
     $conn = new mysqli($db["hostname"], $db["username"], $db["password"], $db["table"]);
