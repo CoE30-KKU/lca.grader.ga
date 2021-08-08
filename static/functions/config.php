@@ -1,8 +1,8 @@
 <?php
     $db = array(
-        "hostname" => "203.159.94.111",
+        "hostname" => "pondja.thddns.net:4416",
         "username" => "graderga",
         "password" => "8db!#yYvK]8Lw6F|37wz:UwU",
-        "table" => "lca.grader.ga"
+        "table" => "lcagraderga"
     );
 ?>
