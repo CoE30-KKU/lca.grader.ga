@@ -2,8 +2,8 @@
 
     $maildb = array(
         "hostname" => "203.159.94.111",
-        "username" => "graderga",
-        "password" => "8db!#yYvK]8Lw6F|37wz:UwU",
+        "username" => "p0ndja",
+        "password" => "P0ndJ@1103",
         "table" => "p0ndja"
     );
 
