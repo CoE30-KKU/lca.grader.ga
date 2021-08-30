@@ -21,7 +21,7 @@
         <div class="d-none d-md-block" style="padding-top: 5vh;"></div>
             <div class="table-responsive">
             <h4 class="font-weight-bold text-center text-coekku">Donator</h4>
-            <p class="text-center text-muted"><small>ทุกคนที่บริจาคจะได้รับ <text class="rainbow font-weight-bold">ชื่อสีรุ้ง</text> (ถาวร)</small></p>
+            <p class="text-center text-muted"><small>ทุกคนที่บริจาคจะได้รับ <text class="rainbow font-weight-bold">ชื่อสีรุ้ง</text> (ถาวร)</small><br><small><text class='font-weight-italic text-coekku'>ตัดรอบทุก ๆ วันที่ 26 เวลา 23:59:59 ของทุกเดือน</text></small></p>
                 <table class="table table-sm table-hover w-100" id="submissionTable" style="max-height: 60vh;">
                     <thead>
                         <tr class="text-nowrap me">
@@ -31,7 +31,7 @@
                     </thead>
                     <tbody class="text-nowrap">
                         <?php
-                            $json = json_decode(file_get_contents("http://api.11th.studio/p0ndja/donation_grader"), true);
+                            $json = json_decode(file_get_contents("http://api.11th.studio/p0ndja/donation_grader?onlyThisMonth"), true);
                             $amount = 0;
                             foreach ($json as $j) {
                                 $time = strtotime($j['timestamp']); $month = date('m', $time);
@@ -50,7 +50,7 @@
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-coekku" role="progressbar" style="width: <?php echo $val;?>%" aria-valuenow="<?php echo $val;?>" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-            <small><?php echo $amount; ?>/150 THB (<?php echo $valMsg; ?>)</small>
+            <p class="text-center"><small class="text-muted"><?php echo $amount; ?>/150 THB (<?php echo $valMsg; ?>)</small></p>
             <?php
                 $f = file_get_contents("http://api.11th.studio/p0ndja/invoice.txt"); 
                 $f = explode("\n", $f);
