@@ -31,7 +31,7 @@
                     </thead>
                     <tbody class="text-nowrap">
                         <?php
-                            $json = json_decode(file_get_contents("http://api.11th.studio/p0ndja/donation_grader?onlyThisMonth"), true);
+                            $json = json_decode(file_get_contents("http://203.159.94.111/api.11th.studio/p0ndja/donation_grader?onlyThisMonth"), true);
                             $amount = 0;
                             foreach ($json as $j) {
                                 $time = strtotime($j['timestamp']); $month = date('m', $time);
@@ -52,7 +52,7 @@
             </div>
             <p class="text-center"><small class="text-muted"><?php echo $amount; ?>/150 THB (<?php echo $valMsg; ?>)</small></p>
             <?php
-                $f = file_get_contents("http://api.11th.studio/p0ndja/invoice.txt"); 
+                $f = file_get_contents("http://203.159.94.111/api.11th.studio/p0ndja/invoice.txt"); 
                 $f = explode("\n", $f);
                 if (!empty($f)) {
                     echo "<hr>ประวัติการชำระค่า Server<br>";
