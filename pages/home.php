@@ -7,7 +7,7 @@
                     <h1 class="font-weight-bold text-coekku display-4">Grader.ga <span class="badge badge-lca">LCA</span></h1>
                     <h4 class="font-weight-normal">The Computer Engineering of <b class="text-nowrap">Khon Kaen University</b><br>Student-Made grader.</h4>
                     <a class="btn btn-coekku" href="../problem/">เริ่มทำโจทย์กันเลย !</a>
-                    <a class="btn btn-coekku" target="_blank" href="https://api.grader.ga/doc/How%20to%20use%20LCA%20Graderga.pdf">วิธีการใช้งาน Grader.ga</a>
+                    <a class="btn btn-coekku" target="_blank" href="https://github.com/Nepumi-Jr/HowToUseGraderGa/blob/main/How%20to%20use%20LCA%20Graderga.pdf">วิธีการใช้งาน Grader.ga</a>
                     <?php
                     if ($stmt = $conn -> prepare("SELECT `codename`,`id`,`name`,`properties` FROM `problem` WHERE JSON_EXTRACT(`properties`,'$.hide') = false AND UNIX_TIMESTAMP() - JSON_EXTRACT(`properties`,'$.last_hide_updated') <= 604800 AND JSON_EXTRACT(`properties`,'$.last_hide_updated') > 0 ORDER BY JSON_EXTRACT(`properties`,'$.last_hide_updated') DESC limit 7")) {
                         $stmt->execute();

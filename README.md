@@ -3,7 +3,7 @@ The The Computer Engineering of Khon Kaen University Student-Made grader.
 
 This is an expanded edition of [CoE30-KKU/graderga](https://github.com/CoE30-KKU/graderga) which customized for Linear Circuit Analysis class.
 
-This is **Website** part of our [grader.ga](https://grader.ga/) project, you can look at our juding system at [Nepumi-Jr/Garedami](https://github.com/Nepumi-Jr/Garedami)
+This is **Website** part of our [grader.ga](https://lca.pondja.com/) project, you can look at our juding system at [Nepumi-Jr/Garedami](https://github.com/Nepumi-Jr/Garedami)
 
 ### Feature
 ---

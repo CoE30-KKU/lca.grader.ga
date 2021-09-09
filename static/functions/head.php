@@ -14,14 +14,14 @@
     <link rel="apple-touch-icon" sizes="152x152" href="../static/elements/logo/logo_ios152.png">
 
     <?php $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
-<meta property="og:image" content="//lca.grader.ga/static/elements/logo/logo.jpg" />
+<meta property="og:image" content="//lca.pondja.com/static/elements/logo/logo.jpg" />
     <meta property="og:image:width" content="194" />
     <meta property="og:image:height" content="194" />
     <meta property="og:title" content="Grader.GA - LCA Edition" />
     <title>Grader.ga - LCA Edition</title>
     <meta property="og:description" content="The Computer Engineering of Khon Kaen University Student-Made grader." />
     <meta name="twitter:card" content="summary"></meta>
-    <link rel="image_src" href="//lca.grader.ga/static/elements/logo/logo.jpg" />
+    <link rel="image_src" href="//lca.pondja.com/static/elements/logo/logo.jpg" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="<?php echo $current_url; ?>" />
 
@@ -67,6 +67,9 @@
     <!-- Croppie -->
     <link rel="stylesheet" href="//cdn.11th.studio/croppie/croppie.css" />
     <script src="//cdn.11th.studio/croppie/croppie.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css">
     
     <!-- Fontawesome -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />

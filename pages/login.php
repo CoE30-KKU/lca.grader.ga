@@ -1,4 +1,5 @@
 <?php if (isLogin()) header("Location: ../"); ?>
+<?php $captcha = false; if (isset($_SESSION['page_attempt']) && (int) $_SESSION['page_attempt'] >= 5) { $captcha = true; } ?>
 <div class="container" id="container" style="padding-top: 88px">
     <div class="center">
     <h1 class="display-5 font-weight-bold text-center text-coekku">LOGIN <i class="fas fa-sign-in-alt"></i></h1>
@@ -20,7 +21,7 @@
                         class="form-control form-control-sm validate" required>
                     <label for="login_password">Password</label>
                 </div>
-                <div class="h-captcha" data-sitekey="d9826c31-b8d7-4648-b04f-c5595ffb8c22"></div>
+                <?php if ($captcha) { ?><div class="h-captcha text-center" data-sitekey="d9826c31-b8d7-4648-b04f-c5595ffb8c22"></div><?php } ?>
                 <button type="submit" class="btn btn-block btn-coekku mb-3">Login</button>
                 <input type="hidden" name="method" value="loginPage">
                 <div class=" text-center"><a href="../forgetpassword/" class="text-danger">ลืมรหัสผ่าน</a></div>
@@ -31,6 +32,7 @@
     <div class="alert alert-warning mt-3 blink" role="alert">บัญชีที่ใช้งานไม่ได้ใช้ร่วมกับ grader.ga</div>
     </div>
 </div>
+<?php if ($captcha) { ?>
 <script>
     document.querySelector("#loginForm").addEventListener("submit", function(event) {
         var hcaptchaVal = document.querySelector('[name="h-captcha-response"]').value;
@@ -40,3 +42,4 @@
         }
     });
 </script>
+<?php } ?>

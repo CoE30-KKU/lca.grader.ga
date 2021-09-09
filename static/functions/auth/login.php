@@ -2,21 +2,30 @@
     require_once '../connect.php';
     require_once '../function.php';
 
-    $data = array(
-        'secret' => "0xE838c11950365625476E7a2d3fD0353F1bd467f0",
-        'response' => $_POST['h-captcha-response']
-    );
+    $captcha = false;
+    if (!isset($_SESSION['page_attempt'])) {
+        $_SESSION['page_attempt'] = 0;
+    } else {
+        if ((int) $_SESSION['page_attempt'] > 5)    $captcha = true;
+        else                                        $_SESSION['page_attempt']++;
+    }
 
-    $verify = curl_init();
-    curl_setopt($verify, CURLOPT_URL, "https://hcaptcha.com/siteverify");
-    curl_setopt($verify, CURLOPT_POST, true);
-    curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
-    curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
-    $response = curl_exec($verify);
-    // var_dump($response);
+    function checkCaptcha() {
+        $data = array(
+            'secret' => "0xE838c11950365625476E7a2d3fD0353F1bd467f0",
+            'response' => $_POST['h-captcha-response']
+        );
 
-    $responseData = json_decode($response);
-    if ($responseData->success) {
+        $verify = curl_init();
+        curl_setopt($verify, CURLOPT_URL, "https://hcaptcha.com/siteverify");
+        curl_setopt($verify, CURLOPT_POST, true);
+        curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($verify);
+        return json_decode($response)->success;
+    }
+
+    if ($captcha == false || ($captcha && checkCaptcha()) ) {
         //Only accept validated captcha.
 
         if (isset($_POST['method']) && $_POST['method'] == 'loginPage') {

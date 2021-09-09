@@ -12,7 +12,7 @@
                 <center><a id="donateSubmit" class="btn btn-coekku btn-md">ส่งเอกสารการโอนเงินโดเนท</a></center>
                 <script>
                     $("#donateSubmit").on('click', function() {
-                        window.open('https://grader.ga/donation/submit','popUpWindow','height=200,width=500,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+                        window.open('https://grader.pondja.com/donation/submit','popUpWindow','height=200,width=500,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
                     });
                 </script>
             </p>
@@ -31,7 +31,7 @@
                     </thead>
                     <tbody class="text-nowrap">
                         <?php
-                            $json = json_decode(file_get_contents("http://203.159.94.111/api.11th.studio/p0ndja/donation_grader?onlyThisMonth"), true);
+                            $json = json_decode(file_get_contents("http://203.159.94.111/api.11th.studio/p0ndja/donation_grader"), true);
                             $amount = 0;
                             foreach ($json as $j) {
                                 $time = strtotime($j['timestamp']); $month = date('m', $time);
