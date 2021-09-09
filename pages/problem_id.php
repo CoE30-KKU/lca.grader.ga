@@ -26,19 +26,66 @@
     }
 ?>
 <div class="container mb-3" style="padding-top: 88px;" id="container">
-    <h2 class="font-weight-bold text-coekku"><?php echo $name; ?> <span
-            class='badge badge-coekku'><?php echo $codename; ?></span>
-        <?php if ($owner) { echo "<a href=\"../pages/problem_toggle_view.php?problem_id=$id&hide=$hide\">"; if ($hide) { echo '<i class="fas fa-eye-slash"></i>'; } else { echo '<i class="fas fa-eye"></i>'; } echo '</a>'; } ?>
-    </h2>
-    <small class="text-muted"><?php echo $author; ?></small>
+    <div class="d-flex mb-0">
+        <div class="flex-grow-1 mb-0">
+            <h2 class="font-weight-bold text-coekku"><?php echo $name; ?> <span
+                class='badge badge-coekku'><?php echo $codename; ?></span>
+            <?php if ($owner) { echo "<a href=\"../pages/problem_toggle_view.php?problem_id=$id&hide=$hide\">"; if ($hide) { echo '<i class="fas fa-eye-slash"></i>'; } else { echo '<i class="fas fa-eye"></i>'; } echo '</a>'; } ?>
+            </h2>
+            <small class="text-muted"><?php echo $author; ?></small>
+        </div>
+        <div>
+            <h2 class="mb-0 text-coekku-hover" onclick="copyThisPageURL();" id="postIDforCopyBtn" style="cursor: pointer;">#<?php echo $id; ?>
+                <script>
+                    var countCopy = 1;
+                    function copyThisPageURL() {
+                        if (countCopy <= 11) {
+                            var dummy = document.createElement('input'),
+                                text = window.location.href;
+
+                            document.body.appendChild(dummy);
+                            dummy.value = text;
+                            dummy.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(dummy);
+                            var message; 
+                            switch(true) {
+                                case countCopy == 2:
+                                    message = "Double copied!";
+                                    break;
+                                case countCopy == 3:
+                                    message = "Triple copied!";
+                                    break;
+                                case countCopy == 4:
+                                    message = "Quadruple copied!";
+                                    break;
+                                case countCopy == 5:
+                                    message = "Quintuple copied!";
+                                    break;
+                                case countCopy > 5 && countCopy <= 10:
+                                    message = "Copied! But you should go popcat.click";
+                                    break;
+                                case countCopy > 10:
+                                    message = "No more copy for you!";
+                                    break;
+                                default:
+                                    message = "Copied URL to clipboard!";
+                            }
+                            toastr.info(message);
+                            countCopy++;
+                        }
+                    }
+                </script>
+            </h2>
+        </div>
+    </div>
     <hr>
     <div class="row">
         <div class="col-12 col-lg-8">
-            <a href="../problem/" class="float-left"><i class="fas fa-arrow-left"></i> ย้อนกลับ</a>
-            <a target="_blank" href="../doc/<?php echo $id; ?>-<?php echo $codename; ?>"
-                class="float-right">เปิดในแท็บใหม่ <i class="fas fa-location-arrow"></i></a>
+            <a href="../problem/" class="float-left"><i class="fas fa-arrow-left"></i> Back</a>
+            <a target="_blank" href="../doc/<?php echo $id; ?>-<?php echo $codename; ?>" class="float-right">Open PDF <i class="fas fa-external-link-alt"></i></a>
             <iframe src="../vendor/pdf.js/web/viewer.html?file=../../../doc/<?php echo $id; ?>-<?php echo $codename; ?>"
-                width="100%" height="650" class="z-depth-1 mb-3" id="pdfViewer"></iframe>
+                width="100%" height="650" name="pdfViewer" id="pdfViewer" class="mt-2 z-depth-1 mb-3"></iframe>
         </div>
         <div class="col-12 col-lg-4">
             <div id="problemDetails">
