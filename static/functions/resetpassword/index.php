@@ -6,13 +6,13 @@
     $email = $_GET['email'];
 
     global $conn;
-    if ($stmt = $conn->prepare("SELECT `id`,`username`,`password` FROM `user` WHERE json_extract(`tempAuthKey`. `$.key`) = ? AND email = ? LIMIT 1")) {
+    if ($stmt = $conn->prepare("SELECT `id`,`username`,`password` FROM `user` WHERE json_extract(`tempAuthKey`,'$.key') = ? AND email = ? LIMIT 1")) {
         $stmt->bind_param('ss', $key, $email);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows == 1) {
             while ($row = $result->fetch_assoc()) {
-                if (useAuthKey($key, $row['id'], 30*60)) {
+                if (useAuthKey($key, 30*60, $row['id'])) {
                     header("Location: ../auth/login.php?user=".$row['username']."&pass=".$row['password']."&method=reset");
                     die();
                 }

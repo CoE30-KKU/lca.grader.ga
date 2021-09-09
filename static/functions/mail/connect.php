@@ -10,7 +10,7 @@
     $mailsender = array(
         "name"=>"Grader.ga",
         "email"=>"p0ndja.dev@gmail.com",
-        "password"=>"fbP>ZM4kZVPM"
+        "password"=>"nlertkybrcvwvssg"
     );
     $mailsenderData = json_encode($mailsender);
 

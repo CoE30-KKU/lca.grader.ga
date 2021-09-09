@@ -119,10 +119,8 @@
 
     
     //checkTime is in second unit as UNIX TIME FORMAT.
-    function checkAuthKey(String $authKey, int $checkTime = 0) {
+    function checkAuthKey(String $authKey, int $checkTime = 0, int $uid = 0) {
         global $conn;
-        if (!isLogin()) return false;
-        $uid = $_SESSION['user']->getID();
         if ($stmt = $conn->prepare("SELECT `tempAuthKey` FROM `user` WHERE `id` = ?")) {
             $stmt->bind_param('i',$uid);
             $stmt->execute();
@@ -165,11 +163,9 @@
         }
     }
 
-    function useAuthKey(String $authKey, int $checkTime = 0) {
+    function useAuthKey(String $authKey, int $checkTime = 0, int $uid = 0) {
         global $conn;
-        if (!isLogin()) return false;
-        $uid = $_SESSION['user']->getID();
-        if (checkAuthKey($authKey, $checkTime)) {
+        if (checkAuthKey($authKey, $checkTime, $uid)) {
             if ($stmt = $conn->prepare("UPDATE `user` SET `tempAuthKey` = null WHERE `id` = ?")) {
                 $stmt->bind_param('i',$uid);
                 return $stmt->execute();
