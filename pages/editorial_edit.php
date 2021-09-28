@@ -84,7 +84,7 @@
         var editor = editormd("editormd", {
             width: "100%",
             height: "700",
-            path: "https://cdn.p0nd.ga/editor.md/lib/",
+            path: "https://cdn.p0nd.dev/editor.md/lib/",
             theme : "<?php if (isDarkmode()) echo "dark"; else echo "default"; ?>",
             previewTheme : "<?php if (isDarkmode()) echo "dark"; else echo "default"; ?>",
             editorTheme : "<?php if (isDarkmode()) echo "monokai"; else echo "default"; ?>",

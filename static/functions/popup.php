@@ -10,12 +10,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="https://s3.p0nd.ga/file/d52fa/banner.jpg"
+                <img src="https://s3.p0nd.dev/file/d52fa/banner.jpg"
                     class="img-fluid w-100 d-flex justify-content-center mb-3 z-depth-2">
                 <div class="modal-text">
                     <p>ทางผู้พัฒนาขอความร่วมมือจากผู้เข้าชมเว็บไซต์ทุก ๆ ท่าน ร่วมตอบแบบสำรวจความพึงพอใจในการใช้งานเว็บไซต์ <a href="https://grader.pondja.com/">grader.pondja.com</a> และ/หรือ <a href="https://lca.pondja.com/">lca.pondja.com</a><br><p class="text-right">ขอบคุณครับ<br>PondJa<sup>TH</sup></p>
                     </p>
-                    <div class="text-center"><a href="https://p0nd.ga/graderga_survey" target="_blank" class="btn btn-coekku"><h1 class="animated infinite pulse">ตอบแบบสอบถาม</h1></a></div>
+                    <div class="text-center"><a href="https://p0nd.dev/graderga_survey" target="_blank" class="btn btn-coekku"><h1 class="animated infinite pulse">ตอบแบบสอบถาม</h1></a></div>
                 </div>
             </div>
             <div class="modal-footer">

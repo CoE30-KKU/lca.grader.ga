@@ -352,7 +352,7 @@
         
          $ch = curl_init();
         
-        curl_setopt($ch, CURLOPT_URL, 'https://img.p0nd.ga/upload.php');
+        curl_setopt($ch, CURLOPT_URL, 'https://img.p0nd.dev/upload.php');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_TIMEOUT, 86400); // 1 Day Timeout
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60000);
