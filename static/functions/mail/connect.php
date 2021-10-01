@@ -1,7 +1,7 @@
 <?php
 
     $maildb = array(
-        "hostname" => "203.159.94.111",
+        "hostname" => "192.168.0.180",
         "username" => "p0ndja",
         "password" => "P0ndJ@1103",
         "table" => "p0ndja"
