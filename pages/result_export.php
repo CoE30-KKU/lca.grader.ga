@@ -29,14 +29,11 @@ xmlns="http://www.w3.org/TR/REC-html40">
             <th>#</th>
             <th>Student ID</th>
             <th>Name</th>
-            <th>C3 Q1</th>
-            <th>C3 Q2</th>
-            <th>C3 Q3</th>
-            <th>C3 Q4</th>
-            <th>C3 Q5</th>
-            <th>C3 Q6</th>
-            <th>C3 Q7</th>
-            <th>C3 Q8</th>
+            <th>C4 Q1</th>
+            <th>C4 Q2</th>
+            <th>C4 Q3</th>
+            <th>C4 Q4</th>
+            <th>C4 Q5</th>
             <th>Total</th>
         </tr>
         <?php 
@@ -48,7 +45,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
                 echo "<td>" . str_replace(")", "", $user[1]) . "</td>";
                 echo "<td>" . $user[0] . "</td>";
                 $total = 0;
-                for($i = 65; $i <= 72; $i++) {
+                for($i = 73; $i <= 77; $i++) {
                     $score = (int) lastResult2($o,$i);
                     $total += $score;
                     echo "<td>$score</td>";
