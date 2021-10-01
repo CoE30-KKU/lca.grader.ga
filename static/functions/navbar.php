@@ -41,7 +41,7 @@
                         <a class="dropdown-item" href="../profile/"> แก้ไขข้อมูลส่วนตัว <i class="fas fa-user"></i></a>
                         <?php if (isAdmin()) { ?>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../pages/page_loader.php?target=result.php"> ดูคะแนนการส่งคำตอบ <i class="fas fa-star"></i></a>
+                            <a class="dropdown-item" href="../admin/result"> ดูคะแนนการส่งคำตอบ <i class="fas fa-star"></i></a>
                         <?php } ?>
                         <div class="dropdown-divider"></div>
                         <button class="dropdown-item text-danger" id="logoutBtn">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></button>

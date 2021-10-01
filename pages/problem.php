@@ -2,7 +2,7 @@
     <h1 class="display-4 font-weight-bold text-center text-coekku">Problem</h1>
     <?php if (isLogin()) { ?><a href="../problem/create" class="btn btn-coekku btn-sm">+ Add Problem</a><?php } ?>
     <div class="table-responsive">
-        <table class="table table-hover table-striped w-100 d-block d-md-table" id="problemTable">
+        <table class="table table-sm table-striped w-100 d-block d-md-table" id="problemTable">
             <thead>
                 <tr class="text-nowrap">
                     <th scope="col" class="font-weight-bold text-coekku text-right">ID</th>
