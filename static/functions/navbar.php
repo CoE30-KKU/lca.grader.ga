@@ -38,13 +38,14 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo $_SESSION['user']->getProfile(); ?>" id="profile" class="rounded-circle" width="20" alt="Profile"> <?php echo $_SESSION['user']->getDisplayname(); ?></a>
                     <div class="dropdown-menu dropdown-menu-left dropdown-menu-md-right dropdown-coekku z-depth-1" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="../profile/"> แก้ไขข้อมูลส่วนตัว <i class="fas fa-user"></i></a>
+                        <a class="dropdown-item" href="../profile/"> แก้ไขข้อมูลส่วนตัว <i class="fas fa-user-edit mt-1" style="float: right; "></i></a>
                         <?php if (isAdmin()) { ?>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../admin/result"> ดูคะแนนการส่งคำตอบ <i class="fas fa-star"></i></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-info" href="../admin/result"> รายงานผลคะแนน <i class="fas fa-star mt-1" style="float: right; "></i></a>
+                        <a class="dropdown-item text-info" href="../admin/user"> จัดการบัญชีนักศึกษา <i class="fas fa-users mt-1" style="float: right; "></i></a>
                         <?php } ?>
                         <div class="dropdown-divider"></div>
-                        <button class="dropdown-item text-danger" id="logoutBtn">ออกจากระบบ <i class="fas fa-sign-out-alt"></i></button>
+                        <button class="dropdown-item text-danger" id="logoutBtn">ออกจากระบบ <i class="fas fa-sign-out-alt mt-1" style="float: right; "></i></button>
                     </div>
                 </li>
                 <?php } else { ?>
