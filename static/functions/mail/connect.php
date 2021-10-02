@@ -1,17 +1,5 @@
 <?php
-
-    $maildb = array(
-        "hostname" => "192.168.0.180",
-        "username" => "p0ndja",
-        "password" => "P0ndJ@1103",
-        "table" => "p0ndja"
-    );
-
-    $mailsender = array(
-        "name"=>"Grader.ga",
-        "email"=>"p0ndja.dev@gmail.com",
-        "password"=>"nlertkybrcvwvssg"
-    );
+    require_once 'conf.php';
     $mailsenderData = json_encode($mailsender);
 
     global $mailconn;
