@@ -5,7 +5,7 @@
     <!-- Google Font -->
     <link rel="preconnect" href="//fonts.googleapis.com">
     <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
-    <link href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Kanit:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Kanit:wght@400;700&family=IBM+Plex+Sans+Thai:wght@500;700&family=Inter:wght@500;700&display=swap" rel="stylesheet">
 
     <!-- Webcustom -->
     <link rel="shortcut icon" href="../static/elements/logo/favicon.ico" type="image/x-icon">
