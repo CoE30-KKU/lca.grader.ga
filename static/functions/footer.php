@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <hr>
         <div class="text-center mb-3">
-            Grader.ga - Made with <b style="color: salmon; ">Meow🐾</b> by <a href="https://www.facebook.com/p0ndja/" class="font-weight-bold">PondJaᵀᴴ</a> & <a href="https://www.facebook.com/Neptune.dreemurr" class="font-weight-bold">Nepumi</a>
+        Grader.ga - Made with <b style="color: salmon; ">Meow🐾</b> by <a href="https://github.com/p0ndja/" class="font-weight-bold">PondJaᵀᴴ</a> & <a href="https://github.com/Nepumi-Jr/" class="font-weight-bold">Nepumi</a>
             <br><sup><small class="text-muted" style="opacity:0.75;"><?php $target = "../version.txt"; if (file_exists($target)) echo "Version " . fread(fopen($target, "r"),filesize($target)); ?> | <a href="//m.me/p0ndja">Report a bug</a> | <?php $end_time = microtime(TRUE); $time_taken =($end_time - $start_time)*1000; $time_taken = round($time_taken,5); echo 'Page generated in ' . $time_taken . ' ms.';?></small></sup>
         </div>
     </div>
