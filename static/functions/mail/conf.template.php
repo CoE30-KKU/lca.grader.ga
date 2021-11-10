@@ -11,4 +11,6 @@
         "email"=>"",
         "password"=>""
     );
+
+    $mailsenderData = json_encode($mailsender);
 ?>

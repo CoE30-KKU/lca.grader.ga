@@ -1,7 +1,6 @@
 <?php
     require_once 'conf.php';
-    $mailsenderData = json_encode($mailsender);
-
+    
     global $mailconn;
     $mailconn = new mysqli($maildb["hostname"], $maildb["username"], $maildb["password"], $maildb["table"]);
     mysqli_set_charset($mailconn, 'utf8mb4');
