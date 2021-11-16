@@ -51,18 +51,6 @@
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-coekku" role="progressbar" style="width: <?php echo $val;?>%" aria-valuenow="<?php echo $val;?>" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <p class="text-center"><small class="text-muted"><?php echo $amount; ?>/150 THB (<?php echo $valMsg; ?>)</small></p>
-            <?php
-                $f = file_get_contents("http://203.159.94.111/api.11th.studio/p0ndja/invoice.txt"); 
-                $f = explode("\n", $f);
-                if (!empty($f)) {
-                    echo "<hr>ประวัติการชำระค่า Server<br>";
-                    foreach($f as $l) {
-                        $i = explode(" ", $l);
-                        if (!empty($i[0]))
-                            echo "<a href='$i[0]' target='_blank'><span class='badge badge-coekku'>$i[1]</span></a> ";
-                    }
-                }
-            ?>
         </div>
     </div>
 </div>
