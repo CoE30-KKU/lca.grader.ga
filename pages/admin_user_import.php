@@ -60,6 +60,7 @@
             $_SESSION['swal_success'] = "สำเร็จ";
             $_SESSION['swal_success_msg'] = "นำเข้าข้อมูลนักศึกษา $count รายการแล้ว";
         }
+        header("Location: ../admin/user");
     }
     header("Location: ../admin/user");
 ?>
