@@ -39,21 +39,20 @@
             $std_id_md5 = md5($std_id);
             $std_name = $std_list[$i]['name'];
             $std_email = $std_list[$i]['email'];
-            $query .= "INSERT INTO `user` (`std_id`, `password`, `name`, `email`, `year`, `sems`) SELECT * FROM (SELECT '$std_id', '$std_id_md5', '$std_name', '$std_email', $year, $sems) AS tmp WHERE NOT EXISTS (SELECT `std_id` FROM `user` WHERE `std_id` = '$std_id') LIMIT 1;";
-/*
-            if ($i%10 == 0 && $i != 0) {
-                //Do fast query to save memory.
-                if ($conn->multi_query($query)) $query = ""; //Clear query queue
-                else {
+            if ($stmt = $conn->prepare("INSERT INTO `user` (`std_id`, `password`, `name`, `email`, `year`, `sems`) SELECT * FROM (SELECT '$std_id', '$std_id_md5', '$std_name', '$std_email', $year, $sems) AS tmp WHERE NOT EXISTS (SELECT `std_id` FROM `user` WHERE `std_id` = '$std_id') LIMIT 1;")) {
+                if (!$stmt->execute()) {
                     $error = true;
-                    break; //Shit, can't query, break it.
+                    break;
+                } else {
+                    continue;
                 }
+            } else {
+                $error = true;
+                break;
             }
-*/
         }
-
-        if ($query != "" && !$conn->multi_query($query)) $error = true;
-
+        
+        
         if ($error) {
             $_SESSION['swal_error'] = "พบข้อผิดพลาด";
             $_SESSION['swal_error_msg'] = "ERROR 40 : ไม่สามารถ Query Database ได้\n$conn->error";

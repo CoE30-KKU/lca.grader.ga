@@ -188,9 +188,72 @@
                 $this->id = $data['id'];
                 $this->name = $data['name'];
                 $this->email = $data['email'];
-                //$this->user = $data['std_id'];
+                $this->user = $data['std_id'];
                 $this->profile = $data['profile'];
                 $this->properties = json_decode($data['properties'], true);
+            } else {
+                $this->id = -1;
+            }
+        }
+    }
+
+    class Assignment {
+        protected int $id, $assigner;
+        protected String $name;
+        protected $assignee, $problem, $properties;
+
+        public function getTitle() {
+            return $this->name;
+        }
+
+        public function setTitle(String $title) {
+            $this->name = $title;
+        }
+
+        public function getAssigner() {
+            return $this->assigner;
+        }
+
+        public function setAssigner(String $assigner) {
+            $this->assigner = $assigner;
+        }
+
+        public function getAssignee() {
+            return $this->assignee;
+        }
+
+        public function setAssignee(String $assignee) {
+            $this->assignee = $assignee;
+        }
+
+        public function getProblem() {
+            return $this->problem;
+        }
+
+        public function setProblem($problem) {
+            $this->problem = $problem;
+        }
+
+        public function properties() {
+            return $this->properties;   
+        }
+        public function getProperties(String $key) {
+            if (empty($this->properties)) return null;
+            return array_key_exists($key, $this->properties()) ? $this->properties()[$key] : null;
+        }
+        public function setProperties(String $key, $val) {
+            $this->properties[$key] = $val;
+        }
+
+        public function __construct(int $id) {
+            $this->id = $id;
+            $data = getAssignmentData($id);
+            if (!empty($data)) {
+                $this->name = $data['name'];
+                $this->assigner = $data['assigner'];
+                $this->assignee = json_decode($data['assignee'], true);
+                $this->properties = json_decode($data['properties'], true);
+                $this->problem = json_decode($data['problem'], true);
             } else {
                 $this->id = -1;
             }

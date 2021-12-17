@@ -10,7 +10,10 @@
             
                 $prop = json_decode($row['properties'],true);
                 $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
-                $rate = array_key_exists("rating", $prop) ? $prop["rating"] : 0;
+
+                $ratingCalculated = (float) $row['ratingCalculated'];
+                $rating = json_decode($row['rating'],true);
+                $already_rate = (!empty($rating) && isLogin() && array_key_exists($_SESSION['user']->getID(), $rating));
 
                 $owner = isOwner($id);
 
@@ -99,65 +102,81 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="card-text">
-                            <h4 class="text-center">Difficulty: <?php echo rating($rate); ?></h4>
+                            <h4 class="text-center" id="ratingCal">Difficulty: <?php echo rating($ratingCalculated); ?> <?php if ($ratingCalculated > 0) echo "(".number_format((float) $ratingCalculated, 2, '.', '').")"; ?></h4>
+                            <?php if (!$already_rate) { ?>
                             <div class='rating-stars text-center'>
-                                        <ul id='stars'>
-                                        Rate this problem: 
-                                            <li class='star' title='Easy' data-value='1'>
-                                                <i class='fas fa-bolt'></i>
-                                            </li>
-                                            <li class='star' title='Normal' data-value='2'>
-                                                <i class='fas fa-bolt'></i>
-                                            </li>
-                                            <li class='star' title='Hard' data-value='3'>
-                                                <i class='fas fa-bolt'></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                <script>
-                                    $(document).ready(function () {
-                                        /* 1. Visualizing things on Hover - See next part for action on click */
-                                        $('#stars li').on('mouseover', function () {
-                                            var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
-                                            // Now highlight all the stars that's not after the current hovered star
-                                            $(this).parent().children('li.star').each(function (e) {
-                                                if (e < onStar) {
-                                                    $(this).addClass('hover');
-                                                } else {
-                                                    $(this).removeClass('hover');
-                                                }
-                                            });
-                                        }).on('mouseout', function () {
-                                            $(this).parent().children('li.star').each(function (e) {
+                                <ul id='stars'>
+                                Rate this problem: 
+                                    <li class='star' title='Easy' data-value='1'>
+                                        <i class='fas fa-bolt'></i>
+                                    </li>
+                                    <li class='star' title='Normal' data-value='2'>
+                                        <i class='fas fa-bolt'></i>
+                                    </li>
+                                    <li class='star' title='Hard' data-value='3'>
+                                        <i class='fas fa-bolt'></i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <script>
+                                $(document).ready(function () {
+                                    /* 1. Visualizing things on Hover - See next part for action on click */
+                                    $('#stars li').on('mouseover', function () {
+                                        var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+                                        // Now highlight all the stars that's not after the current hovered star
+                                        $(this).parent().children('li.star').each(function (e) {
+                                            if (e < onStar) {
+                                                $(this).addClass('hover');
+                                            } else {
                                                 $(this).removeClass('hover');
-                                            });
+                                            }
                                         });
-
-                                        /* 2. Action to perform on click */
-                                        var rated = false;
-                                        var rate = 0;
-                                        $('#stars li').on('click', function () {
-                                            var onStar = parseInt($(this).data('value'),10); // The star currently selected
-                                            if (rate != 0) onStar = rate;
-                                            else rate = onStar;
-
-                                            var stars = $(this).parent().children('li.star');
-                                            for (i = 0; i < stars.length; i++) {
-                                                $(stars[i]).removeClass('selected');
-                                            }
-                                            for (i = 0; i < onStar; i++) {
-                                                $(stars[i]).addClass('selected');
-                                            }
-                                            // JUST RESPONSE (Not needed)
-                                            var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
-                                            if (rated)
-                                                alert("You're already rated!");
-                                            else
-                                                alert("You rate " + ratingValue + " this problem\nBut nothing gonna be happened, we're currently working in progress in this feature!");
-                                            rated = true;
+                                    }).on('mouseout', function () {
+                                        $(this).parent().children('li.star').each(function (e) {
+                                            $(this).removeClass('hover');
                                         });
                                     });
-                                </script>
+
+                                    /* 2. Action to perform on click */
+                                    var rated = false;
+                                    var rate = 0;
+                                    $('#stars li').on('click', function () {
+                                        var onStar = parseInt($(this).data('value'),10); // The star currently selected
+                                        if (rate != 0) onStar = rate;
+                                        else rate = onStar;
+
+                                        var stars = $(this).parent().children('li.star');
+                                        for (i = 0; i < stars.length; i++) {
+                                            $(stars[i]).removeClass('selected');
+                                        }
+                                        for (i = 0; i < onStar; i++) {
+                                            $(stars[i]).addClass('selected');
+                                        }
+                                        // JUST RESPONSE (Not needed)
+                                        var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+                                        if (rated)
+                                            alert("You're already rated!");
+                                        else {
+                                            $.ajax({
+                                                url: "../pages/problem_rating.php",
+                                                type: "POST",
+                                                data: {
+                                                    "problemID": <?php echo $id; ?>,
+                                                    "userID": <?php echo $_SESSION['user']->getID(); ?>,
+                                                    "rate": ratingValue
+                                                },
+                                                success: function (data) {
+                                                    location.reload();
+                                                }
+                                            });
+                                        }
+                                        rated = true;
+                                    });
+                                });
+                            </script>
+                            <?php } else { ?>
+                                <div class="text-center text-muted">You already rated this problem</div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

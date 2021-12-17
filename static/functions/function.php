@@ -103,6 +103,21 @@
         return null;
     }
 
+    function getAssignmentData(int $id) {
+        global $conn;
+        if ($stmt = $conn->prepare('SELECT * FROM `assignment` WHERE `assignment`.`id` = ?')) {
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    return $row;
+                }
+            }
+        }
+        return null;
+    }
+
     function countCategory($category) {
         global $conn;
         if ($stmt = $conn-> prepare("SELECT count(id) AS cat FROM `editorial` WHERE JSON_EXTRACT(`properties`,'$.hide') = false AND JSON_EXTRACT(`properties`,'$.category') = ? ORDER BY JSON_EXTRACT(`properties`,'$.last_hide_updated')")) {
@@ -293,6 +308,12 @@
         if (isDarkmode()) $targetDir = "dark";
         $files = glob("../static/elements/loading/$targetDir/*.*", GLOB_BRACE);
         return $files[rand(0,count($files)-1)];
+    }
+
+    //https://stackoverflow.com/questions/6041741/fastest-way-to-check-if-a-string-is-json-in-php
+    function isJson($string) {
+        json_decode($string);
+        return json_last_error() === JSON_ERROR_NONE;
     }
 ?>
 <?php
