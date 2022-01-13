@@ -53,9 +53,9 @@
  
 
     <!-- Editor.MD -->
-    <link rel="stylesheet" href="//cdn.p0nd.dev/editor.md/css/editormd.css" />
-    <script src="//cdn.p0nd.dev/editor.md/editormd.min.js"></script>
-    <script src="//cdn.p0nd.dev/editor.md/languages/en.js"></script>
+    <link rel="stylesheet" href="//pandao.github.io/editor.md/css/editormd.min.css" />
+    <script src="//pandao.github.io/editor.md/editormd.min.js"></script>
+    <script src="//pandao.github.io/editor.md/languages/en.js"></script>
 
     <!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css">
@@ -68,8 +68,8 @@
     <script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <!-- Croppie -->
-    <link rel="stylesheet" href="//cdn.p0nd.dev/croppie/croppie.css" />
-    <script src="//cdn.p0nd.dev/croppie/croppie.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css">
