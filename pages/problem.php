@@ -14,15 +14,34 @@
             </thead>
             <tbody class="text-nowrap">
                 <?php
+
+                $tempUser = array();
+                function getNameFromID($id) {
+                    if (array_key_exists($id, $tempUser)) {
+                        return $tempUser[$id];
+                    } else {
+                        if ($stmt = $conn -> prepare("SELECT `user`.`name` as username FROM `user` WHERE `user`.`std_id` = ?" LIMIT 1) {
+                            $stmt->bind_param('s', $id);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            if ($result->num_rows > 0) {
+                                $tempUser[$id] = $result['username'];
+                                return $result['username'];
+                            }
+                        }
+                        $tempUser[$id] = null;
+                        return null;
+                    }
+                }
                 $userID = isLogin() ? $_SESSION['user']->getID() : 0;
                 $admin = isAdmin();
-                if ($stmt = $conn -> prepare("SELECT `problem`.`ratingCalculated` as ratingCalculated, `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, `problem`.`author` as probAuthor, `user`.`name` as username, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = ? AND `submission`.`problem` = `problem`.`id` ORDER BY `submission`.`id` DESC LIMIT 1) as subResult FROM `problem` INNER JOIN `user` WHERE `user`.`std_id` = `problem`.`author` ORDER BY `problem`.`id`")) {
+                if ($stmt = $conn -> prepare("SELECT `problem`.`ratingCalculated` as ratingCalculated, `problem`.`id` as probID, `problem`.`name` as probName, `problem`.`properties` as probProp, `problem`.`codename` as probCode, `problem`.`author` as probAuthor, (select `submission`.`result` as `subResult` FROM `submission` WHERE `submission`.`user` = ? AND `submission`.`problem` = `problem`.`id` ORDER BY `submission`.`id` DESC LIMIT 1) as subResult FROM `problem` ORDER BY `problem`.`id` DESC")) {
                     $stmt->bind_param('i', $userID);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            $id = $row['probID']; $name = $row['probName']; $codename = $row['probCode']; $author = $row['probAuthor']; $user = $row['username'];                            
+                            $id = $row['probID']; $name = $row['probName']; $codename = $row['probCode']; $author = $row['probAuthor']; $user = getNameFromID($author);                            
                             $prop = json_decode($row['probProp'],true);
                             $hide = array_key_exists("hide", $prop) ? $prop["hide"] : false;
                             $ratingCalculated = (float) $row['ratingCalculated'];
