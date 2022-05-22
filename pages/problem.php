@@ -17,16 +17,20 @@
 
                 $tempUser = array();
                 function getNameFromID($id) {
+                    global $tempUser;
+                    global $conn;
                     if (array_key_exists($id, $tempUser)) {
                         return $tempUser[$id];
                     } else {
-                        if ($stmt = $conn -> prepare("SELECT `user`.`name` as username FROM `user` WHERE `user`.`std_id` = ?" LIMIT 1) {
+                        if ($stmt = $conn -> prepare("SELECT `user`.`name` as username FROM `user` WHERE `user`.`std_id` = ? LIMIT 1")) {
                             $stmt->bind_param('s', $id);
                             $stmt->execute();
                             $result = $stmt->get_result();
                             if ($result->num_rows > 0) {
-                                $tempUser[$id] = $result['username'];
-                                return $result['username'];
+                                while ($row = $result->fetch_assoc()) {
+                                    $tempUser[$id] = $row['username'];
+                                    return $row['username'];
+                                }
                             }
                         }
                         $tempUser[$id] = null;
