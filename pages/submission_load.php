@@ -34,13 +34,13 @@
                 $subUser = usergen($row['userDisplayname'], $row['userProperties']);
                 $subProb = probgen($row['probName'], $row['probCodename']);
                 $subResult = $row['result'] != 'W' ? $row['result']: 'รอผลตรวจ...';
-                $subScore = $row['maxScore'] != 0 ? ($row['score']/$row['maxScore'])*$row['probScore'] : "UNDEFINED";
+                $subScore = $row['maxScore'] != 0 ? sprintf("%.2f", ($row['score']/$row['maxScore'])*$row['probScore']) : "UNDEFINED";
                 //$subRuntime = $row['runningtime']/1000;
                 $subUploadtime = $row['uploadtime']; 
                 $clfl = (isLogin() && $_SESSION['user']->getID() == $row['user']) ? "ThisIsMine" : "ThisIsNotMine";
                 $i++; ?>
                 <tr style="cursor: pointer;" onclick='launchSubmissionModal(<?php echo $subID; ?>);' class='<?php echo $clfl; ?>' id='sub<?php echo $subID;?>' data-toggle='modal' data-target='#modalPopup'>
-                    <th scope='row' data-order='<?php echo $i; ?>'><?php echo $subID; ?></th>
+                    <th scope='row' data-order='<?php echo $i; ?>'><?php echo str_pad($subID, 6, '0', STR_PAD_LEFT); ?></th>
                     <td data-order='<?php echo $i; ?>'><?php echo $subUploadtime; ?></td>
                     <td><?php echo $subUser; ?></td>
                     <td><a href="../problem/<?php echo $row['probID']; ?>"><?php echo $subProb; ?></a></td>
